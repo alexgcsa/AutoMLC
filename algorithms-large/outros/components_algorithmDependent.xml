@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+		- "gene": Indica uma posição no cromossomo, podendo ser preenchido por qualquer um dos alelos.
+		- "geneOption": Extende "gene" mas marca a entrada de valores, na forma de alelos.
+		- "allele: Indica as opções de preenchimento para seu gene "pai".
+		- Parâmetros:
+			- comment: Comentário a respeito do campo
+			- parameter: parâmetro utilizado no Weka para a chamada
+			- type (apenas para "gene"): Tipo do gene. Quatro possíveis valores:
+				- "int": Indica um intervalo (fechado) de valores inteiros. Se o campo "step" for utilizado, o valor inicial será 						 incrementado "step" até o valor final (default "step"=1)
+				- "float": Indica um intervalo (fechado) de valores reais. Se o campo "step" for utilizado, o intervalo é divido 						   em "step" pedaços (default "step"=10)
+				- "set": Todos os valores possíveis são listados
+				- "allele": Indica uma lista de alelos.
+	-->
+<template maxDepth="100"><gene>
+<allele comment="Multi-label learning - That needs a single-label classifier as parameter">
+
+	<gene comment="Multi-label classification threshold" parameter="">
+		<allele comment="threshold value" parameter="-threshold">
+			<gene comment="threshold options" type="set">
+				<allele>Threshold(PCut1,PCutL,[0.00000000000000000001,1.00])</allele>
+			</gene>
+		</allele>
+	</gene>
+
+	<gene comment="Multi-label meta-classification algorithms" parameter="">
+		<allele comment="Random Subspace Multi-Label" parameter="meka.classifiers.multilabel.meta.RandomSubspaceML">
+			<gene  	comment="Bag size percent" parameter="-P" type="int" step="1">
+				<allele>10,100</allele>
+			</gene>
+			<gene  	comment="Number of interactions" parameter="-I" type="int" step="1">
+				<allele>10,50</allele>
+			</gene>	
+			<gene  	comment="Attribute percent" parameter="-A" type="int" step="1">
+				<allele>10,100</allele>
+			</gene>
+		</allele>
+	</gene>
+
+	<gene comment="Multi-label classification algorithms -- type 2 - dependent" parameter="-W">
+
+		<allele comment="Population of Monte-Carlo Classifier Chains" parameter="meka.classifiers.multilabel.PMCC --">
+			<gene  	comment="Inference iteractions" parameter="-Iy" type="int" step="1">
+				<allele>2,10</allele>
+			</gene>	
+			<gene  	comment="Chain iteractions" parameter="-Is" type="int" step="1">
+				<allele>51,52</allele>
+			</gene>
+			<gene comment="Beta" parameter="-B" type="float" step="1000">
+				<allele>0.01,0.99</allele>
+			</gene>
+			<gene  	comment="Temperature switch" parameter="-O" type="int" step="1">
+				<allele>0,1</allele>
+			</gene>
+			<gene comment="Population size" parameter="-M" type="int" step="1">
+				<allele>1,5</allele>
+			</gene>
+			<gene comment="Payoff function" parameter="-P" type="set">
+				<allele>Accuracy-test</allele>
+                		<allele>Jaccard-index-test</allele>
+				<allele>Hamming-score-test</allele>
+                		<allele>Exact-match-test</allele>
+				<allele>Jaccard-distance-test</allele>
+                		<allele>Hamming-loss-test</allele>
+				<allele>ZeroOne-loss-test</allele>
+                		<allele>Harmonic-score-test</allele>
+				<allele>One-error-test</allele>
+                		<allele>Rank-loss-test</allele>
+				<allele>Avg-precision-test</allele>
+                		<allele>Log-Loss-lim:L-test</allele>
+               			<allele>Log-Loss-lim:D-test</allele>
+				<allele>Micro-Precision-test</allele>
+                		<allele>Micro-Recall-test</allele>
+				<allele>Macro-Precision-test</allele>
+                		<allele>Macro-Recall-test</allele>
+                		<allele>F1-micro-averaged-test</allele>
+				<allele>F1-macro-averaged-by-example-test</allele>
+                		<allele>F1-macro-averaged-by-label-test</allele>
+				<allele>AUPRC-macro-averaged-test</allele>
+                		<allele>AUROC-macro-averaged-test</allele>
+				<allele>Levenshtein-distance-test</allele>	
+			</gene>
+		</allele>
+
+
+
+
+
+
+	</gene>
+
+	<gene comment="Meta SLC level" parameter="">
+		<allele comment="Bagging  meta-classification algorithm" parameter="-W weka.classifiers.meta.Bagging --">
+			<gene  	comment="Bag size percent/Calculate out-of-bag" parameter="" type="set">
+				<allele>{-O -P 100, -P [10,100]}</allele>
+			</gene>
+			<gene  	comment="Number of interactions" parameter="-I" type="int" step="1">
+				<allele>2,128</allele>
+			</gene>		
+		</allele>
+	</gene>
+	
+	<gene comment="Single-Label Machine Learning algorithm" parameter="">
+		
+
+		<allele comment="Logistic Model Trees classification algorithm." parameter="-W weka.classifiers.trees.LMT --">
+			<gene  	comment="Minimum number of objects" parameter="-M" type="int" step="1">
+				<allele>1,64</allele>
+			</gene>	
+			<gene  	comment="Convert nominal" type="set">
+				<allele>-B</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Split on residuals" type="set">
+				<allele>-R</allele>
+				<allele></allele>
+			</gene>		
+			<gene  	comment="Fast regression" type="set">
+				<allele>-C</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Error on probabilities" type="set">
+				<allele>-P</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Weight trim beta" parameter="-W" type="float" step="1000">
+				<allele>0.0,1.0</allele>
+			</gene>	
+			<gene  	comment="Use AIC" type="set">
+				<allele>-A</allele>
+				<allele></allele>
+			</gene>	
+		</allele>
+
+
+	</gene>
+
+
+</allele>
+
+
+</gene></template>
+	
+	
+

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<searchspace>
+	<!--
+		- algorithms: used to build the search space
+	-->
+	<algorithms>
+
+
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>		
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.0-componentsMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/5.0-componentsMLC_algorithmIndependent.xml</path>
+        	<path>algorithms-large/5.1-componentsMetaMLC_algorithmIndependent.xml</path>
+		<path>algorithms-large/0.1-componentsMetaMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.1-componentsMetaMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.1-componentsMetaMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.1-componentsMetaMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.1-componentsMetaMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.1-componentsMetaMLC_algorithmDependent_StandardSLC.xml</path>
+		<path>algorithms-large/0.1-componentsMetaMLC_algorithmDependent_StandardSLC.xml</path>
+
+
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>		
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.0-componentsMLC_algorithmDependent_FeatSelectSLC.xml</path>
+        	<path>algorithms-large/5.0-componentsMLC_algorithmIndependent.xml</path>
+        	<path>algorithms-large/5.1-componentsMetaMLC_algorithmIndependent.xml</path>
+		<path>algorithms-large/1.1-componentsMetaMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.1-componentsMetaMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.1-componentsMetaMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.1-componentsMetaMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.1-componentsMetaMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.1-componentsMetaMLC_algorithmDependent_FeatSelectSLC.xml</path>
+		<path>algorithms-large/1.1-componentsMetaMLC_algorithmDependent_FeatSelectSLC.xml</path>
+
+		<path>algorithms-large/2.0-componentsMLC_algorithmDependent_MetaSLC1.xml</path>
+		<path>algorithms-large/2.0-componentsMLC_algorithmDependent_MetaSLC1.xml</path>
+		<path>algorithms-large/2.0-componentsMLC_algorithmDependent_MetaSLC1.xml</path>
+		<path>algorithms-large/2.0-componentsMLC_algorithmDependent_MetaSLC1.xml</path>
+		<path>algorithms-large/2.0-componentsMLC_algorithmDependent_MetaSLC1.xml</path>
+		<path>algorithms-large/2.0-componentsMLC_algorithmDependent_MetaSLC1.xml</path>
+		<path>algorithms-large/2.0-componentsMLC_algorithmDependent_MetaSLC1.xml</path>
+		<path>algorithms-large/3.0-componentsMLC_algorithmDependent_MetaSLC2.xml</path>
+		<path>algorithms-large/3.0-componentsMLC_algorithmDependent_MetaSLC2.xml</path>
+		<path>algorithms-large/3.0-componentsMLC_algorithmDependent_MetaSLC2.xml</path>
+		<path>algorithms-large/3.0-componentsMLC_algorithmDependent_MetaSLC2.xml</path>		
+		<path>algorithms-large/3.0-componentsMLC_algorithmDependent_MetaSLC2.xml</path>
+		<path>algorithms-large/3.0-componentsMLC_algorithmDependent_MetaSLC2.xml</path>
+		<path>algorithms-large/3.0-componentsMLC_algorithmDependent_MetaSLC2.xml</path>
+		<path>algorithms-large/4.0-componentsMLC_algorithmDependent_MetaSLC3.xml</path>
+		<path>algorithms-large/4.0-componentsMLC_algorithmDependent_MetaSLC3.xml</path>
+		<path>algorithms-large/4.0-componentsMLC_algorithmDependent_MetaSLC3.xml</path>
+		<path>algorithms-large/4.0-componentsMLC_algorithmDependent_MetaSLC3.xml</path>
+        	<path>algorithms-large/5.0-componentsMLC_algorithmIndependent.xml</path>
+        	<path>algorithms-large/5.1-componentsMetaMLC_algorithmIndependent.xml</path>
+		<path>algorithms-large/2.1-componentsMetaMLC_algorithmDependent_MetaSLC1.xml</path>
+		<path>algorithms-large/2.1-componentsMetaMLC_algorithmDependent_MetaSLC1.xml</path>
+		<path>algorithms-large/2.1-componentsMetaMLC_algorithmDependent_MetaSLC1.xml</path>
+		<path>algorithms-large/3.1-componentsMetaMLC_algorithmDependent_MetaSLC2.xml</path>
+		<path>algorithms-large/3.1-componentsMetaMLC_algorithmDependent_MetaSLC2.xml</path>
+		<path>algorithms-large/3.1-componentsMetaMLC_algorithmDependent_MetaSLC2.xml</path>
+		<path>algorithms-large/4.1-componentsMLC_algorithmDependent_MetaSLC3.xml</path>
+		<path>algorithms-large/4.1-componentsMLC_algorithmDependent_MetaSLC3.xml</path>
+
+
+
+
+
+
+
+       
+	</algorithms>
+</searchspace>
+

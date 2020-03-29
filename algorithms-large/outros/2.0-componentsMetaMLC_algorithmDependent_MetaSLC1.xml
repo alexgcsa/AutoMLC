@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+		- "gene": Indica uma posição no cromossomo, podendo ser preenchido por qualquer um dos alelos.
+		- "geneOption": Extende "gene" mas marca a entrada de valores, na forma de alelos.
+		- "allele: Indica as opções de preenchimento para seu gene "pai".
+		- Parâmetros:
+			- comment: Comentário a respeito do campo
+			- parameter: parâmetro utilizado no Weka para a chamada
+			- type (apenas para "gene"): Tipo do gene. Quatro possíveis valores:
+				- "int": Indica um intervalo (fechado) de valores inteiros. Se o campo "step" for utilizado, o valor inicial será 						 incrementado "step" até o valor final (default "step"=1)
+				- "float": Indica um intervalo (fechado) de valores reais. Se o campo "step" for utilizado, o intervalo é divido 						   em "step" pedaços (default "step"=10)
+				- "set": Todos os valores possíveis são listados
+				- "allele": Indica uma lista de alelos.
+	-->
+<template maxDepth="100"><gene>
+<allele comment="Multi-label learning - That needs a single-label classifier as parameter">
+
+	<gene comment="Multi-label classification threshold" parameter="">
+		<allele comment="threshold value" parameter="-threshold">
+			<gene comment="threshold options" type="set">
+				<allele>Threshold(PCut1,PCutL,[0.00000000000000000001,1.00])</allele>
+			</gene>
+		</allele>
+	</gene>
+
+	<gene comment="Multi-label meta-classification algorithms" parameter="">
+		<allele comment="Subset Mapper" parameter="meka.classifiers.multilabel.meta.SubsetMapper">
+		</allele>
+
+		<allele comment="Random Subspace Multi-Label" parameter="meka.classifiers.multilabel.meta.RandomSubspaceML">
+			<gene  	comment="Bag size percent" parameter="-P" type="int" step="1">
+				<allele>10,100</allele>
+			</gene>
+			<gene  	comment="Number of interactions" parameter="-I" type="int" step="1">
+				<allele>10,50</allele>
+			</gene>	
+			<gene  	comment="Attribute percent" parameter="-A" type="int" step="1">
+				<allele>10,100</allele>
+			</gene>
+		</allele>
+	</gene>
+
+	<gene comment="Multi-label classification algorithms -- type 2 - dependent" parameter="-W">
+
+		<allele comment="Binary relevance" parameter="meka.classifiers.multilabel.BR --">
+		</allele>
+
+		<allele comment="Binary relevance - quick version" parameter="meka.classifiers.multilabel.BRq --">
+			<gene  	comment="Down-sample ratio" parameter="-P" type="float" step="1000">
+				<allele>0.2,0.8</allele>
+			</gene>	
+		</allele>
+
+		<allele comment="Classifier Chains - quick version" parameter="meka.classifiers.multilabel.CCq --">
+			<gene  	comment="Down-sample ratio" parameter="-P" type="float" step="1000">
+				<allele>0.2,0.8</allele>
+			</gene>	
+		</allele>
+
+		<allele comment="Classifier Chains" parameter="meka.classifiers.multilabel.CC --">
+		</allele>
+
+		<allele comment="Bayesian Classifier Chain" parameter="meka.classifiers.multilabel.BCC --">
+			<gene comment="Dependency type" parameter="-X" type="set">
+				<allele>C</allele>
+				<allele>I</allele>
+				<allele>Ib</allele>
+				<allele>Ibf</allele>
+				<allele>H</allele>
+				<allele>Hbf</allele>	
+				<allele>None</allele>	
+				<allele>X</allele>
+				<allele>F</allele>
+				<allele>L</allele>		
+			</gene>
+		</allele>
+
+		<allele comment="(Bayes Optimal) Probabilistic Classifier Chains" parameter="meka.classifiers.multilabel.PCC --">
+		</allele>
+
+		<allele comment="Monte-Carlo Classifier Chains" parameter="meka.classifiers.multilabel.MCC --">
+			<gene  comment="Inference Interactions" parameter="-Iy" type="int" step="1">
+				<allele>2,100</allele>
+			</gene>
+			<gene  comment="Chain Interactions" parameter="-Is" type="int" step="1">
+				<allele>2,1500</allele>
+			</gene>
+			<gene comment="Payoff function" parameter="-P" type="set">
+				<allele>Accuracy-test</allele>
+                		<allele>Jaccard-index-test</allele>
+				<allele>Hamming-score-test</allele>
+                		<allele>Exact-match-test</allele>
+				<allele>Jaccard-distance-test</allele>
+                		<allele>Hamming-loss-test</allele>
+				<allele>ZeroOne-loss-test</allele>
+                		<allele>Harmonic-score-test</allele>
+				<allele>One-error-test</allele>
+                		<allele>Rank-loss-test</allele>
+				<allele>Avg-precision-test</allele>
+                		<allele>Log-Loss-lim:L-test</allele>
+               			<allele>Log-Loss-lim:D-test</allele>
+				<allele>Micro-Precision-test</allele>
+                		<allele>Micro-Recall-test</allele>
+				<allele>Macro-Precision-test</allele>
+                		<allele>Macro-Recall-test</allele>
+                		<allele>F1-micro-averaged-test</allele>
+				<allele>F1-macro-averaged-by-example-test</allele>
+                		<allele>F1-macro-averaged-by-label-test</allele>
+				<allele>AUPRC-macro-averaged-test</allele>
+                		<allele>AUROC-macro-averaged-test</allele>
+				<allele>Levenshtein-distance-test</allele>	
+			</gene>
+		</allele>
+
+		<allele comment="Label Powerset" parameter="meka.classifiers.multilabel.LC --">
+		</allele>
+
+		<allele comment="Pruned Sets" parameter="meka.classifiers.multilabel.PS --">
+			
+			<gene  comment="The pruning value" parameter="-P" type="int" step="1">
+				<allele>1,5</allele>
+			</gene>
+			<gene  comment="The subsampling value" parameter="-N" type="int" step="1">
+				<allele>0,5</allele>
+			</gene>
+
+		</allele>
+
+		<allele comment="Pruned Sets" parameter="meka.classifiers.multilabel.PSt --">
+			
+			<gene  comment="The pruning value" parameter="-P" type="int" step="1">
+				<allele>1,5</allele>
+			</gene>
+			<gene  comment="The subsampling value" parameter="-N" type="int" step="1">
+				<allele>0,5</allele>
+			</gene>
+
+		</allele>
+
+		<allele comment="RAndom k-labEL Pruned Sets" parameter="meka.classifiers.multilabel.RAkEL --">
+			
+			<gene  comment="The pruning value" parameter="-P" type="int" step="1">
+				<allele>1,5</allele>
+			</gene>
+			<gene  comment="The subsampling value" parameter="-N" type="int" step="1">
+				<allele>0,5</allele>
+			</gene>
+
+			<gene  comment="Number of labels in each partition" parameter="-k" type="int" step="1">
+				<allele>1,L/2</allele>
+			</gene>
+
+			<gene comment="The number of subsets (to run in ensemble)" parameter="-M" type="int" step="1">
+				<allele>2,min(2*L,100)</allele>		
+			</gene>
+
+		</allele>
+
+		<allele comment="RAndom k-labEL Disjoint Pruned Sets" parameter="meka.classifiers.multilabel.RAkELd --">
+			
+			<gene  comment="The pruning value" parameter="-P" type="int" step="1">
+				<allele>1,5</allele>
+			</gene>
+			<gene  comment="The subsampling value" parameter="-N" type="int" step="1">
+				<allele>0,5</allele>
+			</gene>
+
+			<gene  comment="Number of labels in each partition" parameter="-k" type="int" step="1">
+				<allele>1,L/2</allele>
+			</gene>
+
+		</allele>
+
+		<allele comment="Four-class pairWise classification" parameter="meka.classifiers.multilabel.FW --">
+		</allele>
+
+		<allele comment="Ranking and Threshold" parameter="meka.classifiers.multilabel.RT --">
+		</allele>
+
+		<allele comment="Population of Monte-Carlo Classifier Chains" parameter="meka.classifiers.multilabel.PMCC --">
+			<gene  	comment="Inference iteractions" parameter="-Iy" type="int" step="1">
+				<allele>2,100</allele>
+			</gene>	
+			<gene  	comment="Chain iteractions" parameter="-Is" type="int" step="1">
+				<allele>51,1500</allele>
+			</gene>
+			<gene comment="Beta" parameter="-B" type="float" step="1000">
+				<allele>0.01,0.99</allele>
+			</gene>
+			<gene  	comment="Temperature switch" parameter="-O" type="int" step="1">
+				<allele>0,1</allele>
+			</gene>
+			<gene comment="Population size" parameter="-M" type="int" step="1">
+				<allele>1,50</allele>
+			</gene>
+			<gene comment="Payoff function" parameter="-P" type="set">
+				<allele>Accuracy-test</allele>
+                		<allele>Jaccard-index-test</allele>
+				<allele>Hamming-score-test</allele>
+                		<allele>Exact-match-test</allele>
+				<allele>Jaccard-distance-test</allele>
+                		<allele>Hamming-loss-test</allele>
+				<allele>ZeroOne-loss-test</allele>
+                		<allele>Harmonic-score-test</allele>
+				<allele>One-error-test</allele>
+                		<allele>Rank-loss-test</allele>
+				<allele>Avg-precision-test</allele>
+                		<allele>Log-Loss-lim:L-test</allele>
+               			<allele>Log-Loss-lim:D-test</allele>
+				<allele>Micro-Precision-test</allele>
+                		<allele>Micro-Recall-test</allele>
+				<allele>Macro-Precision-test</allele>
+                		<allele>Macro-Recall-test</allele>
+                		<allele>F1-micro-averaged-test</allele>
+				<allele>F1-macro-averaged-by-example-test</allele>
+                		<allele>F1-macro-averaged-by-label-test</allele>
+				<allele>AUPRC-macro-averaged-test</allele>
+                		<allele>AUROC-macro-averaged-test</allele>
+				<allele>Levenshtein-distance-test</allele>	
+			</gene>
+		</allele>
+
+		<allele comment="Classifier Trellis" parameter="meka.classifiers.multilabel.CT --">
+			<gene  	comment="Chain Iteractions" parameter="-Is" type="int" step="1">
+				<allele>1,1500</allele>
+			</gene>
+			<gene  	comment="Inference Iteractions" parameter="-Iy" type="int" step="1">
+				<allele>1,100</allele>
+			</gene>
+			<gene comment="Payoff function" parameter="-P" type="set">
+				<allele>Accuracy-test</allele>
+                		<allele>Jaccard-index-test</allele>
+				<allele>Hamming-score-test</allele>
+                		<allele>Exact-match-test</allele>
+				<allele>Jaccard-distance-test</allele>
+                		<allele>Hamming-loss-test</allele>
+				<allele>ZeroOne-loss-test</allele>
+                		<allele>Harmonic-score-test</allele>
+				<allele>One-error-test</allele>
+                		<allele>Rank-loss-test</allele>
+				<allele>Avg-precision-test</allele>
+                		<allele>Log-Loss-lim:L-test</allele>
+               			<allele>Log-Loss-lim:D-test</allele>
+				<allele>Micro-Precision-test</allele>
+                		<allele>Micro-Recall-test</allele>
+				<allele>Macro-Precision-test</allele>
+                		<allele>Macro-Recall-test</allele>
+                		<allele>F1-micro-averaged-test</allele>
+				<allele>F1-macro-averaged-by-example-test</allele>
+                		<allele>F1-macro-averaged-by-label-test</allele>
+				<allele>AUPRC-macro-averaged-test</allele>
+                		<allele>AUROC-macro-averaged-test</allele>
+				<allele>Levenshtein-distance-test</allele>	
+			</gene>
+			<gene comment="Dependency type" parameter="-X" type="set">
+				<allele>C</allele>
+				<allele>I</allele>
+				<allele>Ib</allele>
+				<allele>Ibf</allele>
+				<allele>H</allele>
+				<allele>Hbf</allele>
+				<allele>X</allele>
+				<allele>F</allele>
+				<allele>None</allele>				
+			</gene>	
+			<gene  	comment="Density/Width" type="set">
+				<allele>{-H 0 -L 1,-H -1 -L [1,SQRT(L)+1]}</allele>
+			</gene>
+		</allele>
+
+		<allele comment="Conditional Dependency Networks" parameter="meka.classifiers.multilabel.CDN --">
+			<gene  	comment="Iteractions" parameter="-I" type="int" step="1">
+				<allele>101,1000</allele>
+			</gene>
+			<gene  	comment="Collection iterations" parameter="-Ic" type="int" step="1">
+				<allele>1,100</allele>
+			</gene>
+		</allele>
+
+		<allele comment="Conditional Dependency Trellis" parameter="meka.classifiers.multilabel.CDT --">
+			<gene  	comment="Iteractions" parameter="-I" type="int" step="1">
+				<allele>101,1000</allele>
+			</gene>
+			<gene  	comment="Collection iterations" parameter="-Ic" type="int" step="1">
+				<allele>1,100</allele>
+			</gene>
+			<gene comment="Dependency type" parameter="-X" type="set">
+				<allele>C</allele>
+				<allele>I</allele>
+				<allele>Ib</allele>
+				<allele>Ibf</allele>
+				<allele>H</allele>
+				<allele>Hbf</allele>
+				<allele>X</allele>
+				<allele>F</allele>
+				<allele>None</allele>				
+			</gene>	
+			<gene  	comment="Density/Width" type="set">
+				<allele>{-H 0 -L 1,-H -1 -L [1,SQRT(L)+1]}</allele>
+			</gene>
+		</allele>
+
+
+	</gene>
+
+	<gene comment="Meta SLC level" parameter="">
+
+		<allele comment="Random Subspace meta-classification algorithm" parameter="-W weka.classifiers.meta.RandomSubSpace --">
+
+			<gene  	comment="Subspace size" parameter="-P" type="float" step="1000">
+				<allele>0.1,1.0</allele>
+			</gene>
+			<gene  	comment="Number of interactions" parameter="-I" type="int" step="1">
+				<allele>2,64</allele>
+			</gene>		
+		</allele>
+
+		<allele comment="Bagging  meta-classification algorithm" parameter="-W weka.classifiers.meta.Bagging --">
+			<gene  	comment="Bag size percent/Calculate out-of-bag" parameter="" type="set">
+				<allele>{-O -P 100, -P [10,100]}</allele>
+			</gene>
+			<gene  	comment="Number of interactions" parameter="-I" type="int" step="1">
+				<allele>2,128</allele>
+			</gene>		
+		</allele>
+
+
+	</gene>
+
+	
+	<gene comment="Single-Label Machine Learning algorithm" parameter="">
+		
+		<allele comment="Random Forest classifier." parameter="-W weka.classifiers.trees.RandomForest --">
+			<gene  	comment="Number of trees" parameter="-I" type="int" step="1">
+				<allele>2,256</allele>
+			</gene>	
+			<gene  	comment="Number of features" parameter="-K" type="int" step="1">
+				<allele>2,32</allele>
+			</gene>	
+			<gene  	comment="Maximum depth" parameter="-depth" type="int" step="1">
+				<allele>2,20</allele>
+			</gene>				
+		</allele>
+
+		<allele comment="Reapearted Incremental Pruning to Produce Error Reduction (RIPPER) classifier" parameter="-W weka.classifiers.rules.JRip --">
+			<gene  	comment="Minimum total weight" parameter="-N" type="float" step="1000">
+				<allele>1.0,5.0</allele>
+			</gene>	
+			<gene comment="Check error rate" type="set">
+				<allele>-E</allele>
+				<allele></allele>			
+			</gene>
+			<gene comment="Use pruning" type="set">
+				<allele>-P</allele>
+				<allele></allele>			
+			</gene>
+			<gene  	comment="Optimizations" parameter="-O" type="int" step="1">
+				<allele>1,5</allele>
+			</gene>	
+			
+		</allele>
+
+		<allele comment="K nearest neighbors classifier" parameter="-W weka.classifiers.lazy.IBk --">
+			<gene  	comment="KNN" parameter="-K" type="int" step="1">
+				<allele>1,64</allele>
+			</gene>
+			<gene comment="Leave-one-out" type="set">
+				<allele>-X</allele>
+				<allele></allele>			
+			</gene>
+			<gene comment="Distance weighting" type="set">
+				<allele>-I</allele>
+				<allele>-F</allele>
+				<allele></allele>			
+			</gene>
+			
+		</allele>
+
+
+		<allele comment="Logistic Regression Classifier." parameter="-W weka.classifiers.functions.Logistic --">
+			<gene   comment="Ridge value" parameter="-R" type="float" step="1000">
+				<allele>0.000000000001,10.0</allele>
+			</gene>			
+		</allele>
+
+
+		<allele comment="Naive Bayes classifier." parameter="-W weka.classifiers.bayes.NaiveBayes --">
+			<gene comment="Use Kernel estimator/Use Supervised Learning" type="set">
+				<allele>-K</allele>
+				<allele>-D</allele>
+				<allele></allele>			
+			</gene>
+		</allele>
+
+		<allele comment="C4.5 classification algorithm." parameter="-W weka.classifiers.trees.J48 --">
+			<gene  	comment="Unpruned/Subset Raising/Collapse Tree/Confidence Factor" type="set">
+				<allele>-U</allele>
+				<allele>[-S] [-O] -C [0.0,1.0]</allele>
+			</gene>	
+
+			<gene  	comment="Minimum number of objects" parameter="-M" type="int" step="1">
+				<allele>1,64</allele>
+			</gene>
+			<gene  	comment="Binary splits" type="set">
+				<allele>-B</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Use MDL correction" type="set">
+				<allele>-J</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Use Laplace" type="set">
+				<allele>-A</allele>
+				<allele></allele>
+			</gene>		
+		</allele>
+
+		<allele comment="Logistic Model Trees classification algorithm." parameter="-W weka.classifiers.trees.LMT --">
+			<gene  	comment="Minimum number of objects" parameter="-M" type="int" step="1">
+				<allele>1,64</allele>
+			</gene>	
+			<gene  	comment="Convert nominal" type="set">
+				<allele>-B</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Split on residuals" type="set">
+				<allele>-R</allele>
+				<allele></allele>
+			</gene>		
+			<gene  	comment="Fast regression" type="set">
+				<allele>-C</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Error on probabilities" type="set">
+				<allele>-P</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Weight trim beta" parameter="-W" type="float" step="1000">
+				<allele>0.0,1.0</allele>
+			</gene>	
+			<gene  	comment="Use AIC" type="set">
+				<allele>-A</allele>
+				<allele></allele>
+			</gene>	
+		</allele>
+
+		<allele comment="REPTree classification algorithm" parameter="-W weka.classifiers.trees.REPTree --">
+			<gene  	comment="Minimum weight" parameter="-M" type="int" step="1">
+				<allele>1,64</allele>
+			</gene>
+			<gene  	comment="Maximum depth" parameter="-L" type="int" step="1">
+				<allele>2,20</allele>
+			</gene>
+			<gene  	comment="Use pruning" type="set">
+				<allele>-P</allele>
+				<allele></allele>
+			</gene>		
+		</allele>
+
+
+		<allele comment="PART classification algorithm" parameter="-W weka.classifiers.rules.PART --">
+			<gene  	comment="Minimum number of objects" parameter="-M" type="int" step="1">
+				<allele>1,64</allele>
+			</gene>
+			<gene  	comment="Reduce erro pruning/Number of folds" type="set">
+				<allele></allele>
+				<allele>-R -N 2</allele>
+				<allele>-R -N 3</allele>
+				<allele>-R -N 4</allele>
+			</gene>
+			<gene  	comment="Binary splits" type="set">
+				<allele>-B</allele>
+				<allele></allele>
+			</gene>		
+		</allele>
+
+		<allele comment="Decision table classification algorithm" parameter="-W weka.classifiers.rules.DecisionTable --">
+			<gene  	comment="Use IBk" type="set">
+				<allele>-I</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Search method" parameter="-S" type="set">
+				<allele>weka.attributeSelection.BestFirst</allele>
+				<allele>weka.attributeSelection.GreedyStepwise</allele>
+			</gene>
+			<gene  	comment="Cross-Validation" parameter="-X" type="set">
+				<allele>1</allele>
+				<allele>2</allele>
+				<allele>3</allele>
+				<allele>4</allele>
+			</gene>		
+			<gene  	comment="Evaluation measue" parameter="-E" type="set">
+				<allele>acc</allele>
+				<allele>rmse</allele>
+				<allele>mae</allele>
+				<allele>auc</allele>
+			</gene>	
+		</allele>
+
+		<allele comment="K* classification algorithm" parameter="-W weka.classifiers.lazy.KStar --">
+			<gene  comment="Global blending" parameter="-B" type="int" step="1">
+				<allele>1,100</allele>
+			</gene>
+			<gene  	comment="Entropic auto-blending" type="set">
+				<allele>-E</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Missing mode" parameter="-M" type="set">
+				<allele>a</allele>
+				<allele>d</allele>
+				<allele>m</allele>
+				<allele>n</allele>
+			</gene>	
+
+		</allele>
+
+		<allele comment="Multilayer Perceptron classification algorithm" parameter="-W weka.classifiers.functions.MultilayerPerceptron --">			
+			<gene  	comment="Learning rate" parameter="-L" type="float" step="1000">
+				<allele>0.1,1.0</allele>
+			</gene>	
+			<gene  	comment="Momentum" parameter="-M" type="float" step="1000">
+				<allele>0.0,1.0</allele>
+			</gene>	
+			<gene  	comment="Number of hidden nodes" parameter="-H" type="set">
+				<allele>a</allele>
+				<allele>i</allele>
+				<allele>o</allele>
+				<allele>t</allele>
+			</gene>	
+			<gene  	comment="Nominal to binary" type="set">
+				<allele>-B</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Reset" type="set">
+				<allele>-R</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Decay" type="set">
+				<allele>-D</allele>
+				<allele></allele>
+			</gene>	
+
+		</allele>
+
+		<allele comment="Multilayer Perceptron classification algorithm" parameter="-W weka.classifiers.bayes.BayesNet --">
+			<gene  	comment="Search method" parameter="-D -Q" type="set">
+				<allele>weka.classifiers.bayes.net.search.local.TAN</allele>
+				<allele>weka.classifiers.bayes.net.search.local.K2</allele>
+				<allele>weka.classifiers.bayes.net.search.local.HillClimber</allele>
+				<allele>weka.classifiers.bayes.net.search.local.LAGDHillClimber</allele>
+				<allele>weka.classifiers.bayes.net.search.local.TabuSearch</allele>
+				<allele>weka.classifiers.bayes.net.search.local.SimulatedAnnealing</allele>
+			</gene>	
+
+		</allele>
+
+
+		<allele comment="Stochastic Gradient Descent classification algorithm" parameter="-W weka.classifiers.functions.SGD --">
+			<gene  	comment="Loss functin" parameter="-F" type="set">
+				<allele>0</allele>
+				<allele>1</allele>
+				<allele>2</allele>
+			</gene>	
+			<gene  	comment="Learning rate" parameter="-L" type="float" step="1000">
+				<allele>0.00001,1.0</allele>
+			</gene>	
+			<gene  	comment="Ridge" parameter="-R" type="float" step="1000">
+				<allele>0.000000000001,1.0</allele>
+			</gene>				
+			<gene  	comment="Do not normalize" type="set">
+				<allele>-N</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Do not replace missing values" type="set">
+				<allele>-M</allele>
+				<allele></allele>
+			</gene>	
+
+		</allele>
+
+		<allele comment="Multilayer Perceptron classification algorithm" parameter="-W weka.classifiers.functions.SMO --">
+			<gene  	comment="Cost" parameter="-C" type="float" step="1000">
+				<allele>0.5,1.5</allele>
+			</gene>	
+
+			<gene  	comment="Filter type" parameter="-N" type="set">
+				<allele>0</allele>
+				<allele>1</allele>
+				<allele>2</allele>
+			</gene>	
+			<gene  	comment="Build calibration models" type="set">
+				<allele>-M</allele>
+				<allele></allele>
+			</gene>	
+			<gene  	comment="Kernel types" type="set">
+				<allele>-K weka.classifiers.functions.supportVector.NormalizedPolyKernel -E [0.2,5.0] [-L]</allele>
+				<allele>-K weka.classifiers.functions.supportVector.PolyKernel -E [0.2,5.0] [-L]</allele>
+				<allele>-K weka.classifiers.functions.supportVector.Puk -O [0.1,1.0] -S [0.1,10.0]</allele>
+				<allele>-K weka.classifiers.functions.supportVector.RBF -G [0.0001,1.0]</allele>
+			</gene>	
+
+		</allele>
+
+		<allele comment="Decision Stump classification algorithm." parameter="-W weka.classifiers.trees.DecisionStump --">
+		</allele>
+
+		<allele comment="Random Tree classification algorithm" parameter="-W weka.classifiers.trees.RandomTree --">
+			<gene  	comment="Minimum weight" parameter="-M" type="int" step="1">
+				<allele>1,64</allele>
+			</gene>
+			<gene  	comment="Number of features" parameter="-K" type="int" step="1">
+				<allele>2,32</allele>
+			</gene>
+			<gene  	comment="Maximum depth" parameter="-depth" type="int" step="1">
+				<allele>2,20</allele>
+			</gene>
+			<gene  	comment="Use pruning" type="set" parameter="-N">
+				<allele>0</allele>
+				<allele>2</allele>
+				<allele>3</allele>
+				<allele>4</allele>
+				<allele>5</allele>
+			</gene>		
+		</allele>
+
+		<allele comment="1R classification algorithm." parameter="-W weka.classifiers.rules.OneR --">
+			<gene  	comment="Minimum bucket size" parameter="-B" type="int" step="1">
+				<allele>1,32</allele>
+			</gene>
+		</allele>
+
+		<allele comment="ZeroR classification algorithm." parameter="-W weka.classifiers.rules.ZeroR --">
+		</allele>
+
+		<allele comment="Voted Perceptron classification algorithm" parameter="-W weka.classifiers.functions.VotedPerceptron --">
+			<gene  	comment="Number of iterations" parameter="-I" type="int" step="1">
+				<allele>1,10</allele>
+			</gene>
+			<gene  	comment="Max K" parameter="-M" type="int" step="1">
+				<allele>5000,50000</allele>
+			</gene>
+			<gene  	comment="Expoent" parameter="-E" type="float" step="1000">
+				<allele>0.2,5.0</allele>
+			</gene>	
+		</allele>
+
+		<allele comment="Simple Logistic classification algorithm" parameter="-W weka.classifiers.functions.SimpleLogistic --">
+			<gene  	comment="Weigh trim beta" parameter="-W" type="float" step="1000">
+				<allele>0.0,1.0</allele>
+			</gene>	
+
+			<gene  	comment="Use cross-validation" type="set">
+				<allele>-S</allele>
+				<allele></allele>
+			</gene>
+
+			<gene  	comment="Use AIC" type="set">
+				<allele>-A</allele>
+				<allele></allele>
+			</gene>
+
+		</allele>
+
+		<allele comment="Naive Bayes Multinomial classification algorithm" parameter="-W weka.classifiers.bayes.NaiveBayes --">
+		</allele>
+
+	</gene>
+
+
+</allele>
+
+
+</gene></template>
+	
+	
+

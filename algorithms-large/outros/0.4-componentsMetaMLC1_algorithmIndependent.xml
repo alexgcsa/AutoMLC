@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+		- "gene": Indica uma posição no cromossomo, podendo ser preenchido por qualquer um dos alelos.
+		- "geneOption": Extende "gene" mas marca a entrada de valores, na forma de alelos.
+		- "allele: Indica as opções de preenchimento para seu gene "pai".
+		- Parâmetros:
+			- comment: Comentário a respeito do campo
+			- parameter: parâmetro utilizado no Weka para a chamada
+			- type (apenas para "gene"): Tipo do gene. Quatro possíveis valores:
+				- "int": Indica um intervalo (fechado) de valores inteiros. Se o campo "step" for utilizado, o valor inicial será 						 incrementado "step" até o valor final (default "step"=1)
+				- "float": Indica um intervalo (fechado) de valores reais. Se o campo "step" for utilizado, o intervalo é divido 						   em "step" pedaços (default "step"=10)
+				- "set": Todos os valores possíveis são listados
+				- "allele": Indica uma lista de alelos.
+	-->
+<template maxDepth="20"><gene>
+
+<allele comment="Multi-label learning - That does not need a single-label classifier as parameter - independent">
+
+	<gene comment="Multi-label classification threshold" parameter="">
+		<allele comment="threshold value" parameter="-threshold">
+			<gene comment="threshold options" type="set">
+				<allele>Threshold(PCut1,PCutL,[0.00000000000000000001,1.00])</allele>
+			</gene>
+		</allele>
+	</gene>
+
+	<gene comment="Multi-label meta-classification algorithms" parameter="">
+		<allele comment="Subset Mapper" parameter="meka.classifiers.multilabel.meta.SubsetMapper">
+		</allele>
+
+		<allele comment="Random Subspace Multi-Label" parameter="meka.classifiers.multilabel.meta.RandomSubspaceML">
+			<gene  	comment="Bag size percent" parameter="-P" type="int" step="1">
+				<allele>10,100</allele>
+			</gene>
+			<gene  	comment="Number of interactions" parameter="-I" type="int" step="1">
+				<allele>10,50</allele>
+			</gene>	
+			<gene  	comment="Attribute percent" parameter="-A" type="int" step="1">
+				<allele>10,100</allele>
+			</gene>
+		</allele>
+	</gene>
+
+	<gene parameter="-W">
+		<allele comment="Back Propagation Neural Network" parameter="meka.classifiers.multilabel.BPNN --">
+			<gene  	comment="Number of epochs" parameter="-E" type="int" step="25">
+				<allele>10,1000</allele>
+			</gene>
+			<gene comment="Learning rate" parameter="-r" type="float" step="1000" >
+				<allele>0.001,0.1</allele>
+			</gene>
+			<gene comment="Momentum" parameter="-m" type="float" step="1000">
+				<allele>0.2,0.8</allele>
+			</gene>
+
+			<gene comment="Number of hidden units" parameter="-H"  type="int" step="1">
+				<allele>0.2*n_attributes,0.8*n_attributes</allele>
+			</gene>
+
+		</allele>
+	</gene>	
+
+
+
+</allele>
+
+</gene></template>

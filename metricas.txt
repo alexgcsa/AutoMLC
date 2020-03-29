@@ -1,0 +1,57 @@
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Exact match" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst.txt
+
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Accuracy" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst2.txt
+
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Hamming score" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst3.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "F1 (macro averaged by label)" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst5.txt
+
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "F1 (macro averaged by label)" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst6.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Jaccard index" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst5.txt
+
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Jaccard distance" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst7.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Hamming loss" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst8.tx
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "ZeroOne loss" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst9.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy0 -Is 50 -M 10 -P "Harmonic score" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst10.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "One error" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst11.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Rank loss" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst12.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Avg precision" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst13.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Log Loss (lim. L)" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst14.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy0 -Is 50 -M 10 -P "Log Loss (lim. D)" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst15.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy0 -Is 50 -M 10 -P "Micro Precision" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst16.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Micro Recall" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst17.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy0 -Is 50 -M 10 -P "Macro Precision" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst16.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Macro Recall" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst17.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "F1 (micro averaged)" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst119.txt
+
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy0 -Is 50 -M 10 -P "F1 (macro averaged by example)" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst21.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy0 -Is 50 -M 10 -P "AUPRC (macro averaged)" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst22.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "AUROC (macro averaged)" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst23.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Levenshtein distance" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst24.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Label cardinality (predicted)" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst25.txt
+
+java -Xmx2g -cp weka.jar:meka.jar meka.classifiers.multilabel.PMCC -B 0.03 -O 0 -Iy 10 -Is 50 -M 10 -P "Label cardinality (difference)" -S 0 -t Training-0.arff -T Validation-0.arff -verbosity 6 >> tst26.txt
+

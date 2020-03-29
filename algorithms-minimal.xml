@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<searchspace>
+	<!--
+		- algorithms: used to build the search space
+	-->
+	<algorithms>
+		<path>algorithms-minimal/components_algorithmDependent.xml</path>
+		<path>algorithms-minimal/components_algorithmDependent.xml</path>
+		<path>algorithms-minimal/components_algorithmDependent.xml</path>
+		<path>algorithms-minimal/components_algorithmDependent.xml</path>
+        <path>algorithms-minimal/components_algorithmIndependent.xml</path>
+	</algorithms>
+</searchspace>
+

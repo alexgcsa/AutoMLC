@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template maxDepth="13">
+	<!--
+		- "gene": Indica uma posição no cromossomo, podendo ser preenchido por qualquer um dos alelos.
+		- "geneOption": Extende "gene" mas marca a entrada de valores, na forma de alelos.
+		- "allele: Indica as opções de preenchimento para seu gene "pai".
+		- Parâmetros:
+			- comment: Comentário a respeito do campo
+			- parameter: parâmetro utilizado no Weka para a chamada
+			- type (apenas para "gene"): Tipo do gene. Quatro possíveis valores:
+				- "int": Indica um intervalo (fechado) de valores inteiros. Se o campo "step" for utilizado, o valor inicial será 						 incrementado "step" até o valor final (default "step"=1)
+				- "float": Indica um intervalo (fechado) de valores reais. Se o campo "step" for utilizado, o intervalo é divido 						   em "step" pedaços (default "step"=10)
+				- "set": Todos os valores possíveis são listados
+				- "allele": Indica uma lista de alelos.
+	-->
+
+	<gene comment="Type of algorithm">
+		<allele comment="Bayes Network learning using various search algorithms or quality measures." 	
+			parameter="weka.classifiers.bayes.BayesNet">
+			
+			<gene type="float" step="1000" 
+			      comment="Alpha of the estimator" 
+			      parameter="-E weka.classifiers.bayes.net.estimate.SimpleEstimator -- -A">
+				<allele>0.000001,100</allele>
+			</gene>
+
+			<gene comment="SearchMethod" parameter="-D -Q">	
+		
+				<allele comment="NaiveBayes is used here like a fixed structure learning algorithm." 
+					parameter="weka.classifiers.bayes.net.search.fixed.NaiveBayes --" 
+					counting="1000">
+				</allele>
+				
+				<allele comment="Tree Augmented NaiveBayes uses conditional independence tests to learn the BNC structure" 
+					parameter="weka.classifiers.bayes.net.search.ci.TAN --" 
+					counting="4000">
+				        <gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>			
+					</gene>
+					<gene comment="Prior" type="set">
+						<allele>-usePrior</allele>
+						<allele> </allele>				
+					</gene>		
+				</allele>
+
+				<allele comment="ICS Search Algorithm - This Bayes Network learning method uses conditional independence tests 							 to find a skeleton, finds V-nodes and applies a set of rules to find the directions of the
+						 remaining arrows."
+					parameter="weka.classifiers.bayes.net.search.ci.ICSSearchAlgorithm --" 
+					counting="10000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>				
+					<gene comment="ScoringMetricsL" parameter="-S" type="set">
+						<allele>BAYES</allele>
+						<allele>BDeu</allele>
+						<allele>MDL</allele>
+						<allele>ENTROPY</allele>
+						<allele>AIC</allele>			
+					</gene>				
+					<gene comment="Cardinality" parameter="-cardinality" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>
+				</allele>
+
+				<allele comment="ICS Search Algorithm - This Bayes Network learning method uses conditional independence tests 							 to find a skeleton, finds V-nodes and applies a set of rules to find the directions of the
+						 remaining arrows -- Uses score to specify the relation between class and attributes."
+					parameter="weka.classifiers.bayes.net.search.hybrid.ICSSearchAlgorithm --" 
+					counting="30000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>			
+					<gene comment="ScoringMetricsL" parameter="-S" type="set">
+						<allele>BAYES</allele>
+						<allele>BDeu</allele>
+						<allele>MDL</allele>
+						<allele>ENTROPY</allele>
+						<allele>AIC</allele>				
+					</gene>				
+					<gene comment="Cardinality" parameter="-cardinality" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>
+				</allele>
+
+				<allele comment="It uses CI method to generate tree edges and it uses local scoring to select the edges."
+					parameter="weka.classifiers.bayes.net.search.hybrid.G_AN_L --"
+					counting="120000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ForestTree" type="set">
+						<allele>-forest</allele>
+						<allele> </allele>		
+					</gene>
+					<gene comment="ScoringMetricsL" parameter="-S" type="set">
+						<allele>BAYES</allele>
+						<allele>BDeu</allele>
+						<allele>MDL</allele>
+						<allele>ENTROPY</allele>
+						<allele>AIC</allele>				
+					</gene>
+					<gene comment="Prior" type="set">
+						<allele>-usePrior</allele>
+						<allele> </allele>				
+					</gene>						
+				</allele>
+
+				<allele comment="It uses CI method to generate tree edges and it uses global scoring to select the edges."
+					parameter="weka.classifiers.bayes.net.search.hybrid.G_AN_G --" 
+					counting="816000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>	
+					<gene comment="ForestTree" type="set">
+						<allele>-forest</allele>
+						<allele> </allele>		
+					</gene>
+					<gene comment="ScoringMetricsG" parameter="-S" type="set">
+						<allele>LOO-CV</allele>
+						<allele>k-Fold-CV -F 10</allele>
+						<allele>k-Fold-CV -F 5</allele>
+						<allele>Cumulative-CV</allele>
+						<allele>HGC</allele>
+						<allele>HGC -usePrior</allele>	
+						<allele>SB</allele>
+						<allele>SB -usePrior</allele>
+						<allele>LC</allele>
+						<allele>LogC</allele>
+						<allele>LLOO</allele>
+						<allele>LKCV -F 5 -T 1</allele>
+						<allele>LKCV -F 5 -T 5</allele>
+						<allele>LKCV -F 5 -T 10</allele>
+						<allele>LKCV -F 10 -T 1</allele>
+						<allele>LKCV -F 10 -T 5</allele>
+						<allele>LKCV -F 10 -T 10</allele>
+					</gene>
+					<gene comment="Probability" type="set">
+						<allele>-Q</allele> 
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="Prior" type="set">
+						<allele>-usePrior</allele>
+						<allele> </allele>				
+					</gene>		
+				</allele>
+
+				<allele comment="General method to generate tree edges and it uses local scoring to select the edges."
+					parameter="weka.classifiers.bayes.net.search.local.G_AN --" 
+					counting="60000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>	
+					<gene comment="ForestTree" type="set">
+						<allele>-forest</allele>
+						<allele> </allele>				
+					</gene>		
+					<gene comment="ScoringMetricsL" parameter="-S" type="set">
+						<allele>BAYES</allele>
+						<allele>BDeu</allele>
+						<allele>MDL</allele>
+						<allele>ENTROPY</allele>
+						<allele>AIC</allele>			
+					</gene>				
+				</allele>
+				
+				<allele comment="General method to generate tree edges and it uses global scoring to select the edges."
+					parameter="weka.classifiers.bayes.net.search.global.G_AN --" 
+					counting="408000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>	
+					<gene comment="ForestTree" type="set">
+						<allele>-forest</allele>
+						<allele> </allele>			
+					</gene>	
+					<gene comment="ScoringMetricsG" parameter="-S" type="set">
+						<allele>LOO-CV</allele>
+						<allele>k-Fold-CV -F 10</allele>
+						<allele>k-Fold-CV -F 5</allele>
+						<allele>Cumulative-CV</allele>
+						<allele>HGC</allele>
+						<allele>HGC -usePrior</allele>	
+						<allele>SB</allele>
+						<allele>SB -usePrior</allele>
+						<allele>LC</allele>
+						<allele>LogC</allele>
+						<allele>LLOO</allele>
+						<allele>LKCV -F 5 -T 1</allele>
+						<allele>LKCV -F 5 -T 5</allele>
+						<allele>LKCV -F 5 -T 10</allele>
+						<allele>LKCV -F 10 -T 1</allele>
+						<allele>LKCV -F 10 -T 5</allele>
+						<allele>LKCV -F 10 -T 10</allele>	
+					</gene>
+					<gene comment="Probability" type="set">
+						<allele>-Q</allele> 
+						<allele comment="No gene"> </allele>
+					</gene>				
+				</allele>
+
+				<allele comment="Uses Hill-climbing to search for structures -- local scoring metrics."
+					parameter="weka.classifiers.bayes.net.search.local.G_HillClimber --" 
+					counting="120000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>	
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ScoringMetricsL" parameter="-S" type="set">
+						<allele>BAYES</allele>
+						<allele>BDeu</allele>
+						<allele>MDL</allele>
+						<allele>ENTROPY</allele>
+						<allele>AIC</allele>			
+					</gene>
+					<gene comment="ArcReversal" type="set">
+						<allele>-R</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="NBStructure" type="set">
+						<allele>-N</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="Parents" parameter="-P" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>			
+				</allele>
+
+				<allele comment="Uses Hill-climbing to search for structures -- global scoring metrics."
+					parameter="weka.classifiers.bayes.net.search.global.G_HillClimber --" 
+					counting="816000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>	
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ScoringMetricsG" parameter="-S" type="set">
+						<allele>LOO-CV</allele>
+						<allele>k-Fold-CV -F 10</allele>
+						<allele>k-Fold-CV -F 5</allele>
+						<allele>Cumulative-CV</allele>
+						<allele>HGC</allele>
+						<allele>HGC -usePrior</allele>	
+						<allele>SB</allele>
+						<allele>SB -usePrior</allele>
+						<allele>LC</allele>
+						<allele>LogC</allele>
+						<allele>LLOO</allele>
+						<allele>LKCV -F 5 -T 1</allele>
+						<allele>LKCV -F 5 -T 5</allele>
+						<allele>LKCV -F 5 -T 10</allele>
+						<allele>LKCV -F 10 -T 1</allele>
+						<allele>LKCV -F 10 -T 5</allele>
+						<allele>LKCV -F 10 -T 10</allele>	
+					</gene>
+					<gene comment="Probability" type="set">
+						<allele>-Q</allele> 
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ArcReversal" type="set">
+						<allele>-R</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="NBStructure" type="set">
+						<allele>-N</allele>
+						<allele> </allele>				
+					</gene>
+					<gene  comment="Parents" parameter="-P" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>			
+				</allele>
+
+				<allele comment="Uses LAGD Hill-climbing to search for structures -- local scoring metrics."
+					parameter="weka.classifiers.bayes.net.search.local.G_LAGDHillClimber --" 
+					counting="120000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>	
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ScoringMetricsL" parameter="-S" type="set">
+						<allele>BAYES</allele>
+						<allele>BDeu</allele>
+						<allele>MDL</allele>
+						<allele>ENTROPY</allele>
+						<allele>AIC</allele>			
+					</gene>	
+					<gene comment="ArcReversal" type="set">
+						<allele>-R</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="NBStructure" type="set">
+						<allele>-N</allele>
+						<allele></allele>				
+					</gene>
+					<gene comment="LookAhead" parameter="-L" type="int" step="1">
+						<allele>1,5</allele>
+					</gene>
+					<gene  comment="GOperations" parameter="-G" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>
+					<gene  comment="Parents" parameter="-P" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>		
+				</allele>
+
+				<allele comment="Uses Repeated Hill-climbing to search for structures -- local scoring metrics."
+					parameter="weka.classifiers.bayes.net.search.local.G_RepeatedHillClimber --" 
+					counting="120000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ScoringMetricsL" parameter="-S" type="set">
+						<allele>BAYES</allele>
+						<allele>BDeu</allele>
+						<allele>MDL</allele>
+						<allele>ENTROPY</allele>
+						<allele>AIC</allele>				
+					</gene>
+					<gene comment="ArcReversal" type="set">
+						<allele>-R</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="NBStructure" type="set">
+						<allele>-N</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="Seed" parameter="-A" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>
+					<gene comment="RunsL" parameter="-U" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>
+					<gene comment="Parents" parameter="-P" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>		
+				</allele>
+
+				<allele comment="Uses Repeated Hill-climbing to search for structures -- global scoring metrics."
+					parameter="weka.classifiers.bayes.net.search.global.G_RepeatedHillClimber --" 
+					counting="816000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>			
+					</gene>
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ScoringMetricsG" parameter="-S" type="set">
+						<allele>LOO-CV</allele>
+						<allele>k-Fold-CV -F 10</allele>
+						<allele>k-Fold-CV -F 5</allele>
+						<allele>Cumulative-CV</allele>
+						<allele>HGC</allele>
+						<allele>HGC -usePrior</allele>	
+						<allele>SB</allele>
+						<allele>SB -usePrior</allele>
+						<allele>LC</allele>
+						<allele>LogC</allele>
+						<allele>LLOO</allele>
+						<allele>LKCV -F 5 -T 1</allele>
+						<allele>LKCV -F 5 -T 5</allele>
+						<allele>LKCV -F 5 -T 10</allele>
+						<allele>LKCV -F 10 -T 1</allele>
+						<allele>LKCV -F 10 -T 5</allele>
+						<allele>LKCV -F 10 -T 10</allele>	
+					</gene>
+					<gene comment="Probability" type="set">
+						<allele>-Q</allele> 
+						<allele comment="No gene"> </allele>
+					</gene>	
+					<gene comment="ArcReversal" type="set">
+						<allele>-R</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="NBStructure" type="set">
+						<allele>-N</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="Seed" parameter="-A" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>
+					<gene comment="RunsL" parameter="-U" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>
+					<gene comment="Parents" parameter="-P" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>		
+				</allele>
+
+				<allele comment="Uses K2 to search for structures -- local scoring metrics."
+					parameter="weka.classifiers.bayes.net.search.local.G_K2 --" 
+					counting="120000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ScoringMetricsL" parameter="-S" type="set">
+						<allele>BAYES</allele>
+						<allele>BDeu</allele>
+						<allele>MDL</allele>
+						<allele>ENTROPY</allele>
+						<allele>AIC</allele>				
+					</gene>	
+					<gene comment="ArcReversal" type="set">	
+						<allele>-R</allele>
+						<allele> </allele>			
+					</gene>
+					<gene comment="NBStructure" type="set">
+						<allele>-N</allele>
+						<allele> </allele>		
+					</gene>
+					<gene  comment="Parents" parameter="-P" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>		
+				</allele>
+
+				<allele comment="Uses K2 to search for structures -- global scoring metrics."
+					parameter="weka.classifiers.bayes.net.search.global.G_K2 --" 
+					counting="816000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ScoringMetricsG" parameter="-S" type="set">
+						<allele>LOO-CV</allele>
+						<allele>k-Fold-CV -F 10</allele>
+						<allele>k-Fold-CV -F 5</allele>
+						<allele>Cumulative-CV</allele>
+						<allele>HGC</allele>
+						<allele>HGC -usePrior</allele>	
+						<allele>SB</allele>
+						<allele>SB -usePrior</allele>
+						<allele>LC</allele>
+						<allele>LogC</allele>
+						<allele>LLOO</allele>
+						<allele>LKCV -F 5 -T 1</allele>
+						<allele>LKCV -F 5 -T 5</allele>
+						<allele>LKCV -F 5 -T 10</allele>
+						<allele>LKCV -F 10 -T 1</allele>
+						<allele>LKCV -F 10 -T 5</allele>
+						<allele>LKCV -F 10 -T 10</allele>	
+					</gene>
+					<gene comment="Probability" type="set">
+						<allele>-Q</allele> 
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ArcReversal" type="set">
+						<allele>-R</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="NBStructure" type="set">
+						<allele>-N</allele>
+						<allele> </allele>				
+					</gene>
+					<gene  comment="Parents" parameter="-P" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>		
+				</allele>
+
+				<allele comment="Uses Tabu search to look for structures -- local scoring metrics."
+					parameter="weka.classifiers.bayes.net.search.local.G_TabuSearch --" 
+					counting="120000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ScoringMetricsL" parameter="-S" type="set">
+						<allele>BAYES</allele>
+						<allele>BDeu</allele>
+						<allele>MDL</allele>
+						<allele>ENTROPY</allele>
+						<allele>AIC</allele>				
+					</gene>	
+					<gene comment="ArcReversal" type="set">
+						<allele>-R</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="NBStructure" type="set">
+						<allele>-N</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="TLLenght" parameter="-L" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>
+					<gene  comment="RunsL" parameter="-U" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>
+					<gene  comment="Parents" parameter="-P" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>		
+				</allele>
+
+				<allele comment="Uses Tabu search to look for structures -- global scoring metrics."
+					parameter="weka.classifiers.bayes.net.search.global.G_TabuSearch --" 
+					counting="816000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ScoringMetricsG" parameter="-S" type="set">
+						<allele>LOO-CV</allele>
+						<allele>k-Fold-CV -F 10</allele>
+						<allele>k-Fold-CV -F 5</allele>
+						<allele>Cumulative-CV</allele>
+						<allele>HGC</allele>
+						<allele>HGC -usePrior</allele>	
+						<allele>SB</allele>
+						<allele>SB -usePrior</allele>
+						<allele>LC</allele>
+						<allele>LogC</allele>
+						<allele>LLOO</allele>
+						<allele>LKCV -F 5 -T 1</allele>
+						<allele>LKCV -F 5 -T 5</allele>
+						<allele>LKCV -F 5 -T 10</allele>
+						<allele>LKCV -F 10 -T 1</allele>
+						<allele>LKCV -F 10 -T 5</allele>
+						<allele>LKCV -F 10 -T 10</allele>
+					</gene>
+					<gene comment="Probability" type="set">
+						<allele>-Q</allele> 
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ArcReversal" type="set">
+						<allele>-R</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="NBStructure" type="set">
+						<allele>-N</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="TLLenght" parameter="-L" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>
+					<gene comment="RunsL" parameter="-U" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>
+					<gene comment="Parents" parameter="-P" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>		
+				</allele>
+
+				<allele comment="Uses Simulated Annealing to look for structures -- local scoring metrics."
+					parameter="weka.classifiers.bayes.net.search.local.G_SimulatedAnnealing --" 
+					counting="30000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>
+					<gene comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ScoringMetricsL" parameter="-S" type="set">
+						<allele>BAYES</allele>
+						<allele>BDeu</allele>
+						<allele>MDL</allele>
+						<allele>ENTROPY</allele>
+						<allele>AIC</allele>				
+					</gene>	
+					<gene comment="Seed" parameter="-R" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>
+					<gene comment="RunsH" parameter="-U" type="int" step="25">
+						<allele>10,250</allele>
+					</gene>
+					<gene comment="InitialTemp" parameter="-A" type="float" step="10">
+						<allele>10.0,300.0</allele>
+					</gene>
+					<gene comment="Delta" parameter="-D" type="float" step="10">
+						<allele>0.0,1.0</allele>
+					</gene>		
+				</allele>
+
+				<allele comment="Uses Simulated Annealing to look for structures -- global scoring metrics."
+					parameter="weka.classifiers.bayes.net.search.global.G_SimulatedAnnealing --" 
+					counting="204000">
+					<gene comment="MBC" type="set">
+						<allele>-mbc</allele>
+						<allele> </allele>				
+					</gene>
+					<gene  comment="AttributeSelection" type="set">
+						<allele comment="Uses attribute selection">-select</allele> 
+						<allele comment="Uses attribute selection with discarting">-discart</allele>
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="ScoringMetricsG" parameter="-S" type="set">
+						<allele>LOO-CV</allele>
+						<allele>k-Fold-CV -F 10</allele>
+						<allele>k-Fold-CV -F 5</allele>
+						<allele>Cumulative-CV</allele>
+						<allele>HGC</allele>
+						<allele>HGC -usePrior</allele>	
+						<allele>SB</allele>
+						<allele>SB -usePrior</allele>
+						<allele>LC</allele>
+						<allele>LogC</allele>
+						<allele>LLOO</allele>
+						<allele>LKCV -F 5 -T 1</allele>
+						<allele>LKCV -F 5 -T 5</allele>
+						<allele>LKCV -F 5 -T 10</allele>
+						<allele>LKCV -F 10 -T 1</allele>
+						<allele>LKCV -F 10 -T 5</allele>
+						<allele>LKCV -F 10 -T 10</allele>	
+					</gene>
+					<gene comment="Probability" type="set">
+						<allele>-Q</allele> 
+						<allele comment="No gene"> </allele>
+					</gene>
+					<gene comment="Seed" parameter="-R" type="int" step="1">
+						<allele>1,10</allele>
+					</gene>
+					<gene comment="RunsH" parameter="-U" type="int" step="25">
+						<allele>10,250</allele>
+					</gene>
+					<gene comment="InitialTemp" parameter="-A" type="float" step="10">
+						<allele>10.0,300.0</allele>
+					</gene>
+					<gene comment="Delta" parameter="-D" type="float" step="10">
+						<allele>0.0,1.0</allele>
+					</gene>		
+				</allele>
+			</gene>
+		</allele>
+	</gene>
+</template>
+	
+	
+
