@@ -5,7 +5,7 @@ Automated Multi-Label Classification on the MEKA software using Grammar-based Ge
 
 Run the following command line in the directory you downloaded from github:
 
-/home/ **<your_user_dir>/<...>/** jdk1.8.0_171/jre/bin/java -Xmx8g -cp automeka.jar meka.classifiers.multilabel.meta.AutoMEKA_StdGGP -t datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-train1.arff -T datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-test1.arff
+/home/<your_user_dir>/<...>/jdk1.8.0_171/jre/bin/java -Xmx8g -cp automeka.jar meka.classifiers.multilabel.meta.AutoMEKA_StdGGP -t datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-train1.arff -T datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-test1.arff
 
 
 If it works for you, you can try to explore the options for this method:
@@ -13,7 +13,9 @@ If it works for you, you can try to explore the options for this method:
 - -V <value> : to set the elitism size (default: 1).
 - -P <value> : to set the population size (default: 10).
 - -R <value> : to set the resampling of the training and validation sets after R generations. (default: -1, meaning that no resampling is performed).
-- -E <value> : 
+- -E <value> : to set the number of generations/iterations to consider as convergence so the AutoML method can reinit the population. Convergence here means the best individual being maintained for E generations/iterations. Values lower than or equal to zero mean that no reinitialization of the population will be performed. (Default: -1).
+- -Eg <value> : to set the number of generations/iterations to start looking at convergence based on the number of generations/iterations. It depends on the previous parameter to be activated. (Default: 20).
+    
 - -G <value> : to set the number of generations (default: 2).
 - -M <value> : to set the mutation probability (default: 0.10).
 - -X <value> : to set the crossover probability (default: 0.90).
@@ -21,11 +23,22 @@ If it works for you, you can try to explore the options for this method:
 - -H <value>: to set the random seed (default: 11321).
 - -Y <value>: to set the fold init (default: 0). This parameter is just useful to create the fold into the internal validation.
 - -L <value> : to set the ML algorithm time limit (default: 60 [seconds]).
-- -W <value>: to set the experiment name (default: ExperimentABC).
-- -C : changes from generational to anytime behavior (default: not used, False).
-- -B <value>: to set the maximum time limit for the experiment (default: 1 [minute]).
+- -W <path>: to set the path for the experiment (default: ExperimentABC).
+- -C : flag to change from generational to anytime behavior (default: not used, False).
+- -B <value>: to set the maximum time limit for the experiment (default: 10 [minutes]).
+- -JavaDir <path>: to set the path for the used Java.
 - -D <value>: saving directory (default: "~/"). You can define any directory.
-- -O <value>: the grammar mode, where the options are: "full", "SimpGA", "SimpBO" (default: "full").
+- -O <value>: to set the search space mode, i.e., which search space the GGP will use to guide its search. The options are: 
+  - 0: Minimal
+  - 1: Medium
+  - >=2: Large (default)
+- -MM <value>: to set the multi-fidelity mode. This parameter was developed to reduce the computational cost of the AutoML method. Multi-fidelity approaches are
+  - 0: Exponential Attribute Selection, Polynomial Instance Selection
+  - 1: Polynomial Attribute Selection,  Polynomial Instance Selection
+  - 2: No Attribute Selection, Polynomial Instance Selection
+  - 3: Exponential Attribute Selection, No Instance Selection
+  - 4: Polynomial Attribute Selection, No Instance Selection
+  - >=5: No Attribute Selection, No Instance Selection (default)
 
 
 ## **Experimental Results**
