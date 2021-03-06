@@ -21,7 +21,7 @@ If you use this project in your work, be aware of the details in the following p
 
 3. **Auto-MEKA_BO, Auto-MEKA_spGGP, Auto-MEKA_RS and Auto-MEKA_LS**
 
-  - A. G. C. de Sá, C. G. Pimenta,  A. A. Freitas, and G. L. Pappa. TA robust experimental evaluation of automated multi-label classification methods. In Proceedings of the Genetic and Evolutionary Computation Conference, pp. 175–183, 2020. [ [PDF](https://arxiv.org/abs/2005.08083) ] [ [ACM](https://dl.acm.org/doi/abs/10.1145/3377930.3390231) ]
+  - A. G. C. de Sá, C. G. Pimenta,  A. A. Freitas, and G. L. Pappa. TA robust experimental evaluation of automated multi-label classification methods. In Proceedings of the Genetic and Evolutionary Computation Conference, pp. 175–183, 2020. [ [PDF](https://arxiv.org/pdf/2005.08083.pdf) ] [ [ACM](https://dl.acm.org/doi/abs/10.1145/3377930.3390231) ]
   
   - Note that Auto-MEKA_GGP uses modified versions of EpochX, MEKA and WEKA to perform automated multi-label classification. The versions of these frameworks can be found  at: [EpochX](https://github.com/alexgcsa/EpochX), [MEKA](https://github.com/alexgcsa/MEKA), and [WEKA](https://github.com/alexgcsa/WEKA)
   
