@@ -5,7 +5,7 @@ Automated Multi-Label Classification on the MEKA software using Grammar-based Ge
 
 Run the following command line in the directory you downloaded from github:
 
-/home/<your_user_dir>/<...>/jdk1.8.0_171/jre/bin/java -Xmx8g -cp automeka.jar meka.classifiers.multilabel.meta.AutoMEKA_StdGGP -t datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-train1.arff -T datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-test1.arff
+> /home/<your_user_dir>/<...>/jdk1.8.0_171/jre/bin/java -Xmx8g -cp automeka.jar meka.classifiers.multilabel.meta.AutoMEKA_StdGGP -t datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-train1.arff -T datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-test1.arff
 
 
 If it works for you, you can try to explore the options for this method:
@@ -31,14 +31,14 @@ If it works for you, you can try to explore the options for this method:
 - -O <value>: to set the search space mode, i.e., which search space the GGP will use to guide its search. The options are: 
   - 0: Minimal
   - 1: Medium
-  - >=2: Large (default)
+  - 2: Large (default)
 - -MM <value>: to set the multi-fidelity mode. This parameter was developed to reduce the computational cost of the AutoML method. Multi-fidelity approaches are
   - 0: Exponential Attribute Selection, Polynomial Instance Selection
   - 1: Polynomial Attribute Selection,  Polynomial Instance Selection
   - 2: No Attribute Selection, Polynomial Instance Selection
   - 3: Exponential Attribute Selection, No Instance Selection
   - 4: Polynomial Attribute Selection, No Instance Selection
-  - >= 5: No Attribute Selection, No Instance Selection (default)
+  - 5: No Attribute Selection, No Instance Selection (default)
 
 
 ## **Experimental Results**
