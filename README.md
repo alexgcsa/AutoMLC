@@ -37,7 +37,7 @@ All methods depend on Java 8. We recommend you to use the jdk 1.8.0 171 as all m
 
 You are going to use the jdk directory to run the AutoML methods.
 
-# **[Auto-MEKA_GGP](https://github.com/alexgcsa/AutoMLC/tree/master/datasets).**
+### **[Auto-MEKA_GGP](https://github.com/alexgcsa/AutoMLC/tree/master/datasets).**
 
 ## **Datasets**
 
