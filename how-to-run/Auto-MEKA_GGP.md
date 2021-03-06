@@ -8,7 +8,7 @@ Run the following command line in the directory you downloaded from github:
 
 
 If it works for you, you can try to explore the options for this method:
--K <value> : to set the tournament size (default: 2).
+- -K <value> : to set the tournament size (default: 2).
 -V <value> : to set the elitism size (default: 1).
 -P <value> : to set the population size (default: 10).
 -R <value> : to set the resampling of the training and validation sets after R generations. (default: -1, meaning that no resampling is performed).
