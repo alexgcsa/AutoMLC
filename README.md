@@ -8,8 +8,15 @@ Automated Multi-Label Classification
 
 This project presents the Automated Multi-Label Classification (AutoMLC) project. 
 
-This is a project that provides 6 AutoML methods in the context of multi-label classification: GA-Auto-MLC (Genetic Algorithm), Auto-MEKA_GGP (Grammar-based Genetic Programming), Auto-MEKA_spGGP (Speciation-based GGP), AutoMEKA_BO (Bayesian Optimization), Auto_MEKA_RS (Random Search) and Auto-MEKA_LS (Local Search). All methods try to enhance the performance of multi-label classification algorithms on the [MEKA tool](http://waikato.github.io/meka/). 
+This is a project that provides 6 AutoML methods in the context of multi-label classification: 
+1. GA-Auto-MLC -- Genetic Algorithm for Automated Multi-Label Classification
+2. Auto-MEKA_GGP -- Automated Multi-Label Classification with Grammar-based Genetic Programming
+3. Auto-MEKA_spGGP -- Automated Multi-Label Classification with Speciation-Grammar-based Genetic Programming
+4. AutoMEKA_BO -- Automated Multi-Label Classification with Bayesian Optimization
+5. Auto_MEKA_RS  -- Automated Multi-Label Classification with Random Search
+6. Auto-MEKA_LS  -- Automated Multi-Label Classification with Local Search
 
+All methods try to enhance the performance of multi-label classification algorithms on the [MEKA tool](http://waikato.github.io/meka/). 
 
 If you use this project in your work, be aware of the details in the following papers and details:
 
