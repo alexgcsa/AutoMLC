@@ -35,9 +35,9 @@ The description of the multi-label classification (MLC) search is available in t
 
 All methods depend on Java 8. We recommend you to use the jdk 1.8.0 171 as all methods were compiled on this jdk version. However, all jdk 1.8.0 should be fine. You can find jdk for Java 8 to download at:  https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
 
-You are going to use the jdk directory to run the AutoML methods.
+You are going to use the jdk directory to run the AutoML methods. You can find the details on how to run the AutoML methods for multi-label classification in the following links:
 
-### **[Auto-MEKA_GGP](https://github.com/alexgcsa/AutoMLC/tree/master/datasets).**
+### **[Auto-MEKA_GGP](https://github.com/alexgcsa/AutoMLC/tree/master/datasets)**
 
 ## **Datasets**
 
