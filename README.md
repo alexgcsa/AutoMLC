@@ -30,13 +30,12 @@ If you use this project in your work, be aware of the details in the following p
 
   - A. G. C. de Sá, G. L. Pappa, and A. A. Freitas. Automated Selection and Configuration of Multi-Label Classification Algorithms with Grammar-based Genetic Programming. In Proceedings of the  International Conference on Parallel Problem Solving from Nature (PPSN), 2018.  [ [PDF](https://www.cs.kent.ac.uk/people/staff/aaf/pub_papers.dir/PPSN-2018-de-Sa.pdf) ] [ [Springer](https://link.springer.com/chapter/10.1007/978-3-319-99259-4_25) ]
 
-3. **Auto-MEKA_BO, Auto-MEKA_spGGP, Auto-MEKA_RS and Auto-MEKA_LS**
+3. **Auto-MEKA_BO, Auto-MEKA_spGGP, Auto-MEKA_RS and Auto-MEKA_LS: **
 
   - A. G. C. de Sá, C. G. Pimenta,  A. A. Freitas, and G. L. Pappa. A robust experimental evaluation of automated multi-label classification methods. In Proceedings of the Genetic and Evolutionary Computation Conference, pp. 175–183, 2020. [ [PDF](https://arxiv.org/pdf/2005.08083.pdf) ] [ [ACM](https://dl.acm.org/doi/abs/10.1145/3377930.3390231) ]
 
-4.  **The description of the multi-label classification (MLC) search is available in the following**
-
--    A. G. C. de Sá, C. G. Pimenta,  A. A. Freitas, and G. L. Pappa. Multi-label classification search space in the MEKA software, 2020. [ [arXiv](https://arxiv.org/abs/1811.11353) ]
+4.  **The description of the multi-label classification (MLC) search is available in the following report:**
+  - A. G. C. de Sá, C. G. Pimenta,  A. A. Freitas, and G. L. Pappa. Multi-label classification search space in the MEKA software, 2020. [ [arXiv](https://arxiv.org/abs/1811.11353) ]
 
   
 5.  Note that Auto-MEKA_GGP uses modified versions of EpochX, MEKA and WEKA to perform automated multi-label classification. The versions of these frameworks can be found  at: [EpochX](https://github.com/alexgcsa/EpochX), [MEKA](https://github.com/alexgcsa/MEKA), and [WEKA](https://github.com/alexgcsa/WEKA)
