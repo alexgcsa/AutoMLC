@@ -38,7 +38,7 @@ If it works for you, you can try to explore the options for this method:
   - 2: No Attribute Selection, Polynomial Instance Selection
   - 3: Exponential Attribute Selection, No Instance Selection
   - 4: Polynomial Attribute Selection, No Instance Selection
-  - >=5: No Attribute Selection, No Instance Selection (default)
+  - >= 5: No Attribute Selection, No Instance Selection (default)
 
 
 ## **Experimental Results**
