@@ -1,9 +1,0 @@
-p_HIDDEN {0,1}[0]
-    1_P {100}[100]
-    2_INT_P [50,100][100]i
-INT_I [2,128][2]il
-Q {REMOVED,REMOVE_PREV}[REMOVE_PREV]
-
-Conditionals:
-1_P | p_HIDDEN in {0}
-2_INT_P | p_HIDDEN in {1}

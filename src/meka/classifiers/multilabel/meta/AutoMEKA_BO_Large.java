@@ -336,7 +336,7 @@ public class AutoMEKA_BO_Large extends AbstractClassifier{
         
         for(int i = 0; i < parallelRuns; i++) {
             estimatedMetricValues[i] = -1;
-            msExperimentPaths[i] = Files.createTempDirectory(Paths.get("/home/alexgcsa"), "automeka").toString() + File.separator;
+            msExperimentPaths[i] = Files.createTempDirectory(Paths.get("/scratch/alexgcsa"), "automeka").toString() + File.separator;
 //                        msExperimentPaths[i] = Files.createTempDirectory( "automeka").toString() + File.separator;
             Experiment exp = new Experiment();
             exp.name = expName;
@@ -521,20 +521,7 @@ public class AutoMEKA_BO_Large extends AbstractClassifier{
         System.exit(1);           
 
 
-//        
-//        System.out.println("final algorithm: "+classifierClass);
-//        System.out.println("final params: "+classifierArgs.toString());
-//
-//        classifier = AbstractClassifier.forName(classifierClass, classifierArgs.clone());
-//
-//        long startTime = System.currentTimeMillis();
-//        is = as.reduceDimensionality(is);
-//        classifier.buildClassifier(is);
-//        long stopTime = System.currentTimeMillis();
-//        finalTrainTime = (stopTime - startTime) / 1000.0;
-//
-//        eval = new Evaluation(is);
-//        eval.evaluateModel(classifier, is);
+
     }
     public String[] clearCommand(String[] commandLine){
         int count = this.countOccurences(commandLine);
@@ -625,39 +612,7 @@ public class AutoMEKA_BO_Large extends AbstractClassifier{
         bw = new BufferedWriter(new FileWriter(this.savingDir + "results-" + this.name + File.separator + "trajectory.txt", true));
         bw.write(logs.toString());
         bw.close();
-        
-        logs = new StringBuffer();
-        for(int i=0; i < this.parallelRuns; i++){
-            String filePath = msExperimentPaths[i] + expName + File.separator + "out" + File.separator + "automeka" + File.separator + "traj-run-"+ (this.seed + i) +".txt";
-            logs.append("###########THREAD ").append((i+1)).append("###########\n");
-            br = new BufferedReader(new FileReader(filePath));
-            
-            while((line=br.readLine())!= null){
-                logs.append(line).append("\n");
-            } 
-            br.close();
-            System.gc();            
-        }
-        
-        bw = new BufferedWriter(new FileWriter(this.savingDir + "results-" + this.name + File.separator + "traj-runs.txt", true));
-        bw.write(logs.toString());
-        bw.close();       
-        logs = new StringBuffer();
-        for(int i=0; i < this.parallelRuns; i++){
-            String filePath = msExperimentPaths[i] + expName + File.separator + "out" + File.separator + "automeka" + File.separator + "log-warn"+ (this.seed + i) +".txt";
-            logs.append("###########THREAD ").append((i+1)).append("###########\n");
-            br = new BufferedReader(new FileReader(filePath));
-            
-            while((line=br.readLine())!= null){
-                logs.append(line).append("\n");
-            } 
-            br.close();
-            System.gc();            
-        }
-        
-        bw = new BufferedWriter(new FileWriter(this.savingDir + "results-" + this.name + File.separator + "log-warn.txt", true));
-        bw.write(logs.toString());
-        bw.close();          
+     
     }
     
     
@@ -899,18 +854,7 @@ public class AutoMEKA_BO_Large extends AbstractClassifier{
             Files.copy(sourceFolder.toPath(), destinationFolder.toPath(), StandardCopyOption.REPLACE_EXISTING);
         }
     }
- 
-//        String [] commandLine = {"cp", "-R", "paramslarge/", "params/"};
-//        ProcessBuilder pb = new ProcessBuilder(commandLine);
-//        pb.redirectErrorStream(true);
-//
-//        //It starts the process. **/
-//        Process proc = pb.start();
-//        /* Clean-up */
-//        proc.destroy();
-//        System.gc();        
-        
-//    }    
+
     
     public void deleteDir(File file) {
         File[] contents = file.listFiles();
@@ -929,6 +873,7 @@ public class AutoMEKA_BO_Large extends AbstractClassifier{
         HandleFiles hf = new HandleFiles();
         
         String path = msExperimentPaths[0] + expName + File.separator;
+        System.out.println("path:: "+path);
         int newSeed = seed + parallelRuns + 1;
         
         hf.splitDataInAStratifiedWay(expName, path, newSeed, fold, n_labels);
@@ -940,7 +885,7 @@ public class AutoMEKA_BO_Large extends AbstractClassifier{
             String [] options = bestAlgorithmsParams[i].substring(1, bestAlgorithmsParams[i].length()-1).split(", ");
             AutoMLCAlgorithm amlc = new AutoMLCAlgorithm(bestAlgorithms[i], options);
             bests.add(amlc);
-//            System.out.println("options:: "+Arrays.toString(command));
+            
         }
         
         ArrayList<AutoMLCAlgorithm> autoMLC = AlgorithmEvaluation.evaluateIndividuals(bests, parallelRuns, trainLimit, path, "Learning.arff", "Validation.arff");
@@ -1014,16 +959,6 @@ public class AutoMEKA_BO_Large extends AbstractClassifier{
         result.addElement(
             new Option("\tThe fold to perform the experiment.\n" + "\t(default: " + DEFAULT_FOLD + ")",
                 "fold", 1, "-fold <runs>"));        
-        //result.addElement(
-        //    new Option("\tThe type of resampling used.\n" + "\t(default: " + String.valueOf(DEFAULT_RESAMPLING) + ")",
-        //        "resampling", 1, "-resampling <resampling>"));
-        //result.addElement(
-        //    new Option("\tResampling arguments.\n" + "\t(default: " + DEFAULT_RESAMPLING_ARGS + ")",
-        //        "resamplingArgs", 1, "-resamplingArgs <args>"));
-        //result.addElement(
-        //    new Option("\tExtra arguments.\n" + "\t(default: " + DEFAULT_EXTRA_ARGS + ")",
-        //        "extraArgs", 1, "-extraArgs <args>"));
-
         Enumeration<Option> enu = super.listOptions();
         while (enu.hasMoreElements()) {
             result.addElement(enu.nextElement());
@@ -1066,12 +1001,6 @@ public class AutoMEKA_BO_Large extends AbstractClassifier{
         result.add("-searchSpaceMode");
         result.add("" + searchSpaceMode);        
         
-        //result.add("-resampling");
-        //result.add("" + resampling);
-        //result.add("-resamplingArgs");
-        //result.add("" + resamplingArgs);
-        //result.add("-extraArgs");
-        //result.add("" + extraArgs);
 
         Collections.addAll(result, super.getOptions());
         return result.toArray(new String[result.size()]);
@@ -1326,59 +1255,6 @@ public class AutoMEKA_BO_Large extends AbstractClassifier{
         return searchSpaceMode;
     }
     
-    
-    
-    
-
-    //public void setResampling(Resampling r) {
-    //    resampling = r;
-    //    resamplingArgs = resamplingArgsMap.get(r);
-    //}
-
-    //public Resampling getResampling() {
-    //    return resampling;
-    //}
-
-    ///**
-    // * Returns the tip text for this property.
-    // * @return tip text for this property
-    // */
-    //public String ResamplingTipText() {
-    //    return "the type of resampling";
-    //}
-
-    //public void setResamplingArgs(String args) {
-    //    resamplingArgs = args;
-    //}
-
-    //public String getResamplingArgs() {
-    //    return resamplingArgs;
-    //}
-
-    ///**
-    // * Returns the tip text for this property.
-    // * @return tip text for this property
-    // */
-    //public String resamplingArgsTipText() {
-    //    return "resampling arguments";
-    //}
-
-    //public void setExtraArgs(String args) {
-    //    extraArgs = args;
-    //}
-
-    //public String getExtraArgs() {
-    //    return extraArgs;
-    //}
-
-    ///**
-    // * Returns the tip text for this property.
-    // * @return tip text for this property
-    // */
-    //public String extraArgsTipText() {
-    //    return "extra arguments";
-    //}
-
     /** Set the WEKA logger.
      * Used for providing feedback during execution.
      *

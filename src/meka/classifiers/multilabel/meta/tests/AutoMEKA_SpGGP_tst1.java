@@ -15,7 +15,7 @@
 package meka.classifiers.multilabel.meta.tests;
 //Java imports:
 import meka.classifiers.multilabel.meta.util.EvolutionaryUtil;
-import meka.classifiers.multilabel.meta.util.Util;
+import meka.classifiers.multilabel.meta.util.DataUtil;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -946,15 +946,15 @@ public class AutoMEKA_SpGGP_tst1 extends AbstractMultiLabelClassifier implements
         
         if((this.getMultiFidelityMode()==2) || (this.getMultiFidelityMode()==5) ){
             System.out.println("No Feature Selection.");
-            Util.noFeatureSelection(nLabels, intemBudgets[posInt], this.getTrainingDirectory());
+            DataUtil.noFeatureSelection(nLabels, intemBudgets[posInt], this.getTrainingDirectory());
         }else if((this.getMultiFidelityMode()==0) || (this.getMultiFidelityMode()==3) ){
             System.out.println("Exponential Feature Selection.");
-            nAttributesToKeep = Util.getAggressivelyMultFidAttributes(nAttributes, steps);
-            Util.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());
+            nAttributesToKeep = DataUtil.getAggressivelyMultFidAttributes(nAttributes, steps);
+            DataUtil.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());
         }else if((this.getMultiFidelityMode()==1) || (this.getMultiFidelityMode()==4) ){
             System.out.println("Polynomial Feature Selection.");
-            nAttributesToKeep = Util.getNonAggressivelyMultFidAttributes(nAttributes, steps);
-            Util.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());            
+            nAttributesToKeep = DataUtil.getNonAggressivelyMultFidAttributes(nAttributes, steps);
+            DataUtil.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());            
         }
         
 
@@ -1028,10 +1028,10 @@ public class AutoMEKA_SpGGP_tst1 extends AbstractMultiLabelClassifier implements
         //Determining the instance in accordance to the multi-fidelity mode.
         if ((this.getMultiFidelityMode() == 0) || (this.getMultiFidelityMode() == 1) || (this.getMultiFidelityMode() == 2)) {
             System.out.println("Polynomial Instance Selection");
-            learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);  
+            learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);  
         }else if ((this.getMultiFidelityMode() == 3) || (this.getMultiFidelityMode() == 4) || (this.getMultiFidelityMode() == 5)) {
             System.out.println("No Instance Selection");
-            learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(usedSeedResample, nFoldsToValid, nFoldsToLearn, nLabels, intemBudgets[posInt]);   
+            learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(usedSeedResample, nFoldsToValid, nFoldsToLearn, nLabels, intemBudgets[posInt]);   
         }
         usedSeedResample++;     
         
@@ -1094,9 +1094,9 @@ public class AutoMEKA_SpGGP_tst1 extends AbstractMultiLabelClassifier implements
             //Resampling data every m_resample generations. 
             if ((this.getResample() > 0) && (generation % this.getResample() == 0) && (generation > 0)) {
                 if ((this.getMultiFidelityMode() == 0) || (this.getMultiFidelityMode() == 1) || (this.getMultiFidelityMode() == 2)) {
-                    learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);
+                    learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);
                 } else if ((this.getMultiFidelityMode() == 3) || (this.getMultiFidelityMode() == 4) || (this.getMultiFidelityMode() == 5)) {
-                    learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(usedSeedResample, nFoldsToValid, nFoldsToLearn, nLabels, intemBudgets[posInt]);
+                    learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(usedSeedResample, nFoldsToValid, nFoldsToLearn, nLabels, intemBudgets[posInt]);
                 }
 //                learningANDvalidationDataDir = splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);
                 saveCompTime = new HashMap<String,Double>();
@@ -1235,17 +1235,17 @@ public class AutoMEKA_SpGGP_tst1 extends AbstractMultiLabelClassifier implements
 
 
                         if ((this.getMultiFidelityMode() == 2) || (this.getMultiFidelityMode() == 5)) {
-                            Util.noFeatureSelection(nLabels, intemBudgets[posInt], this.getTrainingDirectory());
+                            DataUtil.noFeatureSelection(nLabels, intemBudgets[posInt], this.getTrainingDirectory());
                         } else if ((this.getMultiFidelityMode() == 0) || (this.getMultiFidelityMode() == 3)) {
                             steps--;
-                            nAttributesToKeep = Util.getAggressivelyMultFidAttributes(nAttributes, steps);
-                            Util.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());
+                            nAttributesToKeep = DataUtil.getAggressivelyMultFidAttributes(nAttributes, steps);
+                            DataUtil.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());
                             saveCompTime = new HashMap<String,Double>();
                             usedSeedResample++; 
                         } else if ((this.getMultiFidelityMode() == 1) || (this.getMultiFidelityMode() == 4)) {
                             steps--;
-                            nAttributesToKeep = Util.getNonAggressivelyMultFidAttributes(nAttributes, steps);
-                            Util.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());
+                            nAttributesToKeep = DataUtil.getNonAggressivelyMultFidAttributes(nAttributes, steps);
+                            DataUtil.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());
                             saveCompTime = new HashMap<String,Double>();
                             usedSeedResample++; 
                         }
@@ -1255,9 +1255,9 @@ public class AutoMEKA_SpGGP_tst1 extends AbstractMultiLabelClassifier implements
                         if ((this.getMultiFidelityMode() == 0) || (this.getMultiFidelityMode() == 1) || (this.getMultiFidelityMode() == 2)) {
                            nFoldsToLearn++;
                            nFoldsToValid--;
-                           learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);
+                           learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);
                         } else if ((this.getMultiFidelityMode() == 3) || (this.getMultiFidelityMode() == 4) || (this.getMultiFidelityMode() == 5)) {
-                            learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(usedSeedResample, nFoldsToValid, nFoldsToLearn, nLabels, intemBudgets[posInt]);
+                            learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(usedSeedResample, nFoldsToValid, nFoldsToLearn, nLabels, intemBudgets[posInt]);
                         }
                  
                         
@@ -1304,13 +1304,13 @@ public class AutoMEKA_SpGGP_tst1 extends AbstractMultiLabelClassifier implements
         
         System.gc();
         
-        Util.savingLog(interBuffer_case1, "LogCase1_OnlyXOverInter", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());   
-        Util.savingLog(interBuffer_case2, "LogCase2_XOverInterAndMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
-        Util.savingLog(interBuffer_case3, "LogCase3_OnlyXOverInra", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
-        Util.savingLog(interBuffer_case4, "LogCase4_XOverInraAndMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
-        Util.savingLog(interBuffer_case5, "LogCase5_OnlyMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
+        DataUtil.savingLog(interBuffer_case1, "LogCase1_OnlyXOverInter", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());   
+        DataUtil.savingLog(interBuffer_case2, "LogCase2_XOverInterAndMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
+        DataUtil.savingLog(interBuffer_case3, "LogCase3_OnlyXOverInra", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
+        DataUtil.savingLog(interBuffer_case4, "LogCase4_XOverInraAndMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
+        DataUtil.savingLog(interBuffer_case5, "LogCase5_OnlyMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
         
-        Util.removeUnnecessaryFiles(intemBudgets, this.getExperimentName());
+        DataUtil.removeUnnecessaryFiles(intemBudgets, this.getExperimentName());
         
         
         date = new Date();
@@ -1352,7 +1352,7 @@ public class AutoMEKA_SpGGP_tst1 extends AbstractMultiLabelClassifier implements
                     saveCompTime.put(gcp_grammar, gcp.getFitnessValue());
                 }                 
             }
-            Util.savingLog(strB, "TestResultsLog", timeStamp, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
+            DataUtil.savingLog(strB, "TestResultsLog", timeStamp, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
             
                     
         }
@@ -1482,7 +1482,7 @@ public class AutoMEKA_SpGGP_tst1 extends AbstractMultiLabelClassifier implements
         //It resamples again to check the best individual in the whole evolutionary process.
         long newSeedToResample = usedSeedResample;
 //        System.out.println(newSeedToResample);
-        String[] learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(newSeedToResample, nFoldsToLearn, nFoldsToValid, nLabels, budget);
+        String[] learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(newSeedToResample, nFoldsToLearn, nFoldsToValid, nLabels, budget);
         //It chooses among the best individuals of all generations.
         ArrayList<CandidateProgram> m_bestAlgorithms = new ArrayList<CandidateProgram>(EvolutionaryUtil.getBestAlgorithmsGGP(generationBuffer, bestOfTheReinitializations, newSeedToResample, learningANDvalidationDataDir, this.getNumberOfThreads(), this.getSeed(), this.getAlgorithmTimeLimit(), this.getExperimentName(), this.getJavaDir()));
         
@@ -1509,10 +1509,10 @@ public class AutoMEKA_SpGGP_tst1 extends AbstractMultiLabelClassifier implements
                 loggingBuffer[s].append(log);
                 EvolutionaryUtil.savingFitnessLog(loggingBuffer[s], budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit(), true);
             }
-            Util.savingLog(generationBuffer, "LogGenerations", budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
-            Util.savingLog(convergenceBuffer, "LogConvergence", budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
-            Util.savingLog(interXOverBuffer, "LogInterXOver", budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
-            Util.savingLog(intraXOverBuffer, "LogIntraXOver", budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
+            DataUtil.savingLog(generationBuffer, "LogGenerations", budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
+            DataUtil.savingLog(convergenceBuffer, "LogConvergence", budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
+            DataUtil.savingLog(interXOverBuffer, "LogInterXOver", budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
+            DataUtil.savingLog(intraXOverBuffer, "LogIntraXOver", budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
         }
         
   

@@ -1,6 +1,0 @@
-INT_P [10,100][100]i
-INT_I [2,128][10]il
-O {REMOVED,REMOVE_PREV}[REMOVE_PREV]
-
-Conditionals:
-O | INT_P in {100}

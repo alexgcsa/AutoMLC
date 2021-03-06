@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import meka.classifiers.multilabel.meta.automekaggp.core.GrammarDefinitions;
 import meka.classifiers.multilabel.meta.automekaggp.core.MetaIndividualGGP;
+import meka.classifiers.multilabel.meta.automekaggp.core.UpdatedMetaIndividualGGP;
 import meka.classifiers.multilabel.meta.gaautomlc.core.MetaIndividualGA;
 import meka.classifiers.multilabel.meta.gaautomlc.core.xmlparser.Allele;
 import meka.classifiers.multilabel.meta.gaautomlc.core.xmlparser.XMLAlgorithmHandler;
@@ -816,6 +817,48 @@ public class EvolutionaryUtil {
     }   
     
 
+        /**
+     * 
+     * @param generationBuffer
+     * @param bests
+     * @param usedSeed
+     * @param learningANDvalidationDataDir
+     * @param numOfThreads
+     * @param seed
+     * @param algorithmTimeLimit
+     * @param experimentName
+     * @param javaDir
+     * @return
+     * @throws Exception 
+     */
+    public static ArrayList<CandidateProgram> getBestAlgorithmsGGP(final StringBuilder generationBuffer, 
+                                                                ArrayList<CandidateProgram> bests, 
+                                                                long usedSeed, 
+                                                                String [][] learningANDvalidationDataDirs,
+                                                                int numOfThreads, 
+                                                                long seed, 
+                                                                int algorithmTimeLimit, 
+                                                                String experimentName, 
+                                                                String javaDir,
+                                                                int fitnessOption,
+                                                                boolean divTimeLimitByValidationSize
+                                                               ) throws Exception{
+        
+        HashMap<String, Double> saveCompTime = new HashMap<String, Double>(); 
+        generationBuffer.append("==============================================\n");
+        System.out.println("##Evaluating now the best ones...");
+        generationBuffer.append("Evaluating the best ones...\n");  
+        UpdatedMetaIndividualGGP.evaluateIndividuals(bests, learningANDvalidationDataDirs, numOfThreads, seed, saveCompTime, algorithmTimeLimit, experimentName, javaDir, fitnessOption, divTimeLimitByValidationSize);
+        //It sorts the best of the bests.
+        Collections.sort(bests);
+        for(CandidateProgram e : bests){
+            GRCandidateProgram gcp = (GRCandidateProgram) e;
+            String gcp_grammar = gcp.toString();
+            generationBuffer.append(gcp_grammar).append("#").append(gcp.getFitnessValue()).append("\n");     
+        } 
+        
+        return bests;
+    }
     
     
     /**

@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
+
 //MEKA imports:
 import meka.classifiers.multilabel.meta.gaautomlc.core.MetaIndividualGA;
 import meka.classifiers.multilabel.AbstractMultiLabelClassifier;
@@ -26,7 +27,7 @@ import meka.classifiers.multilabel.meta.gaautomlc.core.xmlparser.XMLAlgorithmHan
 import meka.classifiers.multilabel.meta.gaautomlc.core.xmlparser.XMLGeneHandler;
 import meka.core.OptionUtils;
 import meka.classifiers.multilabel.meta.util.EvolutionaryUtil;
-import meka.classifiers.multilabel.meta.util.Util;
+import meka.classifiers.multilabel.meta.util.DataUtil;
 //Mulan imports:
 import mulan.data.InvalidDataFormatException;
 import mulan.data.IterativeStratification;
@@ -927,15 +928,15 @@ public class GAAutoMLC extends AbstractMultiLabelClassifier {
         
         if((this.getMultiFidelityMode()==2) || (this.getMultiFidelityMode()==5) ){
             System.out.println("No Feature Selection.");
-            Util.noFeatureSelection(nLabels, intemBudgets[posInt], this.getTrainingDirectory());
+            DataUtil.noFeatureSelection(nLabels, intemBudgets[posInt], this.getTrainingDirectory());
         }else if((this.getMultiFidelityMode()==0) || (this.getMultiFidelityMode()==3) ){
             System.out.println("Exponential Feature Selection.");
-            nAttributesToKeep = Util.getAggressivelyMultFidAttributes(nAttributes, steps);
-            Util.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());
+            nAttributesToKeep = DataUtil.getAggressivelyMultFidAttributes(nAttributes, steps);
+            DataUtil.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());
         }else if((this.getMultiFidelityMode()==1) || (this.getMultiFidelityMode()==4) ){
             System.out.println("Polynomial Feature Selection.");
-            nAttributesToKeep = Util.getNonAggressivelyMultFidAttributes(nAttributes, steps);
-            Util.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());            
+            nAttributesToKeep = DataUtil.getNonAggressivelyMultFidAttributes(nAttributes, steps);
+            DataUtil.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());            
         }
         
         //It is used to change the seed, when resampling is performed.
@@ -989,34 +990,20 @@ public class GAAutoMLC extends AbstractMultiLabelClassifier {
 
        ArrayList<String> xmlDir = new ArrayList<String>();
        
-//       ArrayList<XMLGeneHandler> xmlGeneHandlerList = new ArrayList<XMLGeneHandler>();
-//       ArrayList<Double> doubleIDList = new ArrayList<Double>();
        for(int init =0; init < this.getPopulationSize(); init++){
             double doubleID = rng.nextDouble();
-//            doubleIDList.add(doubleID);
             int fileID = (int) ((xmlAlgorithmHandler.getAlgorithmsFiles().size()) * doubleID);
 
             XMLGeneHandler xmlGeneHandler = new XMLGeneHandler(new File(xmlAlgorithmHandler.getAlgorithmsFiles().get(fileID)), nAttributes, nLabels);
             String dir = xmlGeneHandler.getXMLPath().getAbsolutePath();
             if(!xmlDir.contains(dir)){
                 xmlDir.add(dir);
-            }
-//            xmlGeneHandlerList.add(xmlGeneHandler);
-            
+            }          
             Allele genes = xmlGeneHandler.getGenes();
             double[] randomChromossome = EvolutionaryUtil.generateRandomChromosome(geneSize, rng, doubleID);
             population.add(new MetaIndividualGA(randomChromossome, genes, 0.0));            
        }
        
-//       XMLGeneHandlerUtil_remove xmlGeneUtil= new XMLGeneHandlerUtil_remove();
-       
-//       ArrayList<XMLGeneHandler> xmlGeneHandlerListFinal = new ArrayList<XMLGeneHandler>(xmlGeneUtil.performParallelParsing(xmlGeneHandlerList, this.getNumberOfThreads()));
-
-        // Generating the initial population
-//        for (int init = 0; init < this.getPopulationSize(); init++) {
-//
-//
-//        }
         System.gc();
         //Phenotype history, to check about convergence.
         String[] phenotypeHistory = null;
@@ -1030,10 +1017,10 @@ public class GAAutoMLC extends AbstractMultiLabelClassifier {
         //Determining the instance in accordance to the multi-fidelity mode.
         if ((this.getMultiFidelityMode() == 0) || (this.getMultiFidelityMode() == 1) || (this.getMultiFidelityMode() == 2)) {
             System.out.println("Polynomial Instance Selection.");
-            learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);  
+            learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);  
         }else if ((this.getMultiFidelityMode() == 3) || (this.getMultiFidelityMode() == 4) || (this.getMultiFidelityMode() == 5)) {
             System.out.println("No Instance Selection.");
-            learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(usedSeedResample, nFoldsToValid, nFoldsToLearn, nLabels, intemBudgets[posInt]);   
+            learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(usedSeedResample, nFoldsToValid, nFoldsToLearn, nLabels, intemBudgets[posInt]);   
         }
         usedSeedResample++;      
         
@@ -1044,9 +1031,7 @@ public class GAAutoMLC extends AbstractMultiLabelClassifier {
         if(this.getAnytime()){            
             this.setNumberOfGenerations(Integer.MAX_VALUE);
         }        
-        
-        
-        
+
         
         System.out.println("Seed:"+this.getSeed() +"#--#Fold:" + this.getFoldInit()+"#--#GA:" + this.getSearchSpaceMode() + "#--#ExecBudget:" + this.getGeneraltimeLimit() +"min#--#AlgBudget:" + this.getAlgorithmTimeLimit()+"s");        
         System.out.println();
@@ -1054,14 +1039,13 @@ public class GAAutoMLC extends AbstractMultiLabelClassifier {
         ArrayList<MetaIndividualGA> populationAux = null;
         ArrayList<MetaIndividualGA> populationTemp = null;
         ArrayList<MetaIndividualGA> finalPopulation = null;
-//        long timeSpentOnTest = 0;
         
         ArrayList<IntermediateResults4GA> intResults = new ArrayList<IntermediateResults4GA>();
         IntermediateResults4GA ir = null;        
         double fitness = 0.0;
         double oldFitness = 0.0; 
         double diff = 0.0;        
-        
+        System.gc();
         
         //It executes for a number of generations. 
         for (generation = 0; generation <= this.getNumberGenerations(); generation++) { 
@@ -1082,19 +1066,24 @@ public class GAAutoMLC extends AbstractMultiLabelClassifier {
                 convergenceBuffer.append("#Reinitialization at the generation ").append(generation).append("\n"); 
                 //Save the best of the specie before reinitialization.
                 bestOfTheReinitializations.add(populationTemp.get(populationTemp.size() - 1));
+                populationTemp=null;
                 generationAux=0;
                 //And update the population.
+                populationAux = null;
+                System.gc();
                 populationAux = EvolutionaryUtil.reInitPopulationGA(this.getPopulationSize(), usedSeedReinit, xmlAlgorithmHandler, geneSize, nAttributes, nLabels, this.getNumberOfThreads());
             } else {
+                System.gc();
+                populationAux = null;
                 populationAux = new ArrayList<MetaIndividualGA>(population);
             } 
             
             //Resampling data every m_resample generations. 
             if ((this.getResample() > 0) && (generation % this.getResample() == 0) && (generation > 0)) {
                 if ((this.getMultiFidelityMode() == 0) || (this.getMultiFidelityMode() == 1) || (this.getMultiFidelityMode() == 2)) {
-                    learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);
+                    learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);
                 } else if ((this.getMultiFidelityMode() == 3) || (this.getMultiFidelityMode() == 4) || (this.getMultiFidelityMode() == 5)) {
-                    learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(usedSeedResample, nFoldsToValid, nFoldsToLearn, nLabels, intemBudgets[posInt]);
+                    learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(usedSeedResample, nFoldsToValid, nFoldsToLearn, nLabels, intemBudgets[posInt]);
                 }
 //                learningANDvalidationDataDir = splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);
                 saveCompTime = new HashMap<String,Double>();
@@ -1215,17 +1204,17 @@ public class GAAutoMLC extends AbstractMultiLabelClassifier {
 
                         
                         if ((this.getMultiFidelityMode() == 2) || (this.getMultiFidelityMode() == 5)) {
-                            Util.noFeatureSelection(nLabels, intemBudgets[posInt], this.getTrainingDirectory());
+                            DataUtil.noFeatureSelection(nLabels, intemBudgets[posInt], this.getTrainingDirectory());
                         } else if ((this.getMultiFidelityMode() == 0) || (this.getMultiFidelityMode() == 3)) {
                             steps--;
-                            nAttributesToKeep = Util.getAggressivelyMultFidAttributes(nAttributes, steps);
-                            Util.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());
+                            nAttributesToKeep = DataUtil.getAggressivelyMultFidAttributes(nAttributes, steps);
+                            DataUtil.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());
                             saveCompTime = new HashMap<String,Double>();
                             usedSeedResample++; 
                         } else if ((this.getMultiFidelityMode() == 1) || (this.getMultiFidelityMode() == 4)) {
                             steps--;
-                            nAttributesToKeep = Util.getNonAggressivelyMultFidAttributes(nAttributes, steps);
-                            Util.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());
+                            nAttributesToKeep = DataUtil.getNonAggressivelyMultFidAttributes(nAttributes, steps);
+                            DataUtil.featureSelection(nAttributesToKeep, nLabels, intemBudgets[posInt], this.getTrainingDirectory());
                             saveCompTime = new HashMap<String,Double>();
                             usedSeedResample++; 
                         }
@@ -1235,9 +1224,9 @@ public class GAAutoMLC extends AbstractMultiLabelClassifier {
                         if ((this.getMultiFidelityMode() == 0) || (this.getMultiFidelityMode() == 1) || (this.getMultiFidelityMode() == 2)) {
                            nFoldsToLearn++;
                            nFoldsToValid--;
-                           learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);
+                           learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(usedSeedResample, nFoldsToLearn, nFoldsToValid, nLabels, intemBudgets[posInt]);
                         } else if ((this.getMultiFidelityMode() == 3) || (this.getMultiFidelityMode() == 4) || (this.getMultiFidelityMode() == 5)) {
-                            learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(usedSeedResample, nFoldsToValid, nFoldsToLearn, nLabels, intemBudgets[posInt]);
+                            learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(usedSeedResample, nFoldsToValid, nFoldsToLearn, nLabels, intemBudgets[posInt]);
                         }
                                                   
                     }
@@ -1247,9 +1236,9 @@ public class GAAutoMLC extends AbstractMultiLabelClassifier {
             
             population = new ArrayList<MetaIndividualGA>(this.operateOverPopulation(populationAux, rng, xmlAlgorithmHandler, nAttributes, nLabels));
 
-            generationAux++;    
+            generationAux++; 
+            System.gc();
         }
-        System.gc();
         
         if ((this.getMultiFidelityMode() == 0) || (this.getMultiFidelityMode() == 1) || (this.getMultiFidelityMode() == 2)) {
             ir = new IntermediateResults4GA(intemBudgets[posInt], populationAux, bestOfTheReinitializations, usedSeedResample, nLabels, generationBuffer, convergenceBuffer, numbOfEval, startTime,
@@ -1272,8 +1261,8 @@ public class GAAutoMLC extends AbstractMultiLabelClassifier {
         }           
 
         
-        Util.removeUnnecessaryFiles(intemBudgets, this.getExperimentName());        
-        Util.removeFiles(xmlDir);
+        DataUtil.removeUnnecessaryFiles(intemBudgets, this.getExperimentName());        
+        DataUtil.removeFiles(xmlDir);
         
         System.gc();       
             
@@ -1370,7 +1359,7 @@ public class GAAutoMLC extends AbstractMultiLabelClassifier {
         }
         //It resamples again to check the best individual in the whole evolutionary process.
         long newSeedToResample =  usedSeedResample;
-        String[] learningANDvalidationDataDir = Util.splitDataInAStratifiedWay(newSeedToResample, nFoldsToLearn, nFoldsToValid, nLabels, budget);
+        String[] learningANDvalidationDataDir = DataUtil.splitDataInAStratifiedWay(newSeedToResample, nFoldsToLearn, nFoldsToValid, nLabels, budget);
         //It chooses among the best individuals of all generations.
         ArrayList<MetaIndividualGA> m_bestAlgorithms = new ArrayList<MetaIndividualGA>(EvolutionaryUtil.getBestAlgorithmsGA(generationBuffer, bestOfTheReinitializations, newSeedToResample, learningANDvalidationDataDir, this.getNumberOfThreads(), this.getSeed(), this.getAlgorithmTimeLimit(), this.getExperimentName(), this.getJavaDir()));
         
@@ -1392,8 +1381,8 @@ public class GAAutoMLC extends AbstractMultiLabelClassifier {
         if (saveLogFiles) {
             EvolutionaryUtil.savingFitnessLog(loggingBuffer, budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit(), false);
 
-            Util.savingLog(generationBuffer, "LogGenerations", budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
-            Util.savingLog(convergenceBuffer, "LogConvergence", budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
+            DataUtil.savingLog(generationBuffer, "LogGenerations", budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
+            DataUtil.savingLog(convergenceBuffer, "LogConvergence", budget, this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());
         }
         
 

@@ -129,7 +129,7 @@ public class XMLGeneHandler {
             bagPercent = this.getBagSizePercentValues();
             content = content.replace("<allele>{-O -P 100, -P [10,100]}</allele>", bagPercent);
             Files.write(path2, content.getBytes(charset));                          
-      
+            System.gc();
             tst = new File(path2.toString()); 
             
         }

@@ -60,7 +60,7 @@ public class HandleFiles {
             MultiLabelInstances dataset = new MultiLabelInstances(arffDir, n_labels);
             
             IterativeStratification is = new IterativeStratification(seed);
-            MultiLabelInstances[] folds = is.stratify(dataset, 5);
+            MultiLabelInstances[] folds = is.stratify(dataset, 6);
             
             /** It creates the validation set. **/
             MultiLabelInstances validationData = new MultiLabelInstances(folds[fold].getDataSet(), dataset.getLabelsMetaData());
