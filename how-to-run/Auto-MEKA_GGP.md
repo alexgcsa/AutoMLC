@@ -23,10 +23,10 @@ If it works for you, you can try to explore the options for this method:
 - -H <value>: to set the random seed (default: 11321).
 - -Y <value>: to set the fold init (default: 0). This parameter is just useful to create the fold into the internal validation.
 - -L <value> : to set the ML algorithm time limit (default: 60 [seconds]).
-- -W <path>: to set the path for the experiment (default: ExperimentABC).
+- -W <path>: to set the path for the experiment (default: "ExperimentABC").
 - -C : flag to change from generational to anytime behavior (default: not used, False).
 - -B <value>: to set the maximum time limit for the experiment (default: 10 [minutes]).
-- -JavaDir <path>: to set the path for the used Java.
+- -JavaDir <path>: to set the path for the used Java. (default: "java")
 - -D <value>: saving directory (default: "~/"). You can define any directory.
 - -O <value>: to set the search space mode, i.e., which search space the GGP will use to guide its search. The options are: 
   - 0: Minimal
