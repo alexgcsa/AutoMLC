@@ -27,6 +27,9 @@ If it works for you, you can try to explore the options for this method:
 - -D <value>: saving directory (default: "~/"). You can define any directory.
 - -O <value>: the grammar mode, where the options are: "full", "SimpGA", "SimpBO" (default: "full").
 
+
+## **Experimental Results*
+
 After running, you are going to have into the saving directory, the generational results, a compact list of the evaluation measures and a full list of the evaluation measures.
 
 - For the results for each generation (e.g., 0Results-ExperimentABC.csv), you would have a file separated by semicolon with: 
