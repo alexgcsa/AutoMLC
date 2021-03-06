@@ -5,7 +5,7 @@ Automated Multi-Label Classification on the MEKA software using Grammar-based Ge
 
 Run the following command line in the directory you downloaded from github:
 
-/home/<your_user_dir>/<...>/jdk1.8.0_171/jre/bin/java -Xmx8g -cp automeka.jar meka.classifiers.multilabel.meta.AutoMEKA_StdGGP -t datasets/Flags-train1.arff -T datasets/Flags-test1.arff
+/home/<your_user_dir>/<...>/jdk1.8.0_171/jre/bin/java -Xmx8g -cp automeka.jar meka.classifiers.multilabel.meta.AutoMEKA_StdGGP -t datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-train1.arff -T datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-test1.arff
 
 
 If it works for you, you can try to explore the options for this method:
