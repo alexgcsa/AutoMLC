@@ -37,7 +37,7 @@ All methods depend on Java 8. We recommend you to use the jdk 1.8.0 171 as all m
 
 You are going to use the jdk directory to run the AutoML methods. You can find the details on how to run the AutoML methods for multi-label classification in the following links:
 
-### **[Auto-MEKA_GGP](https://github.com/alexgcsa/AutoMLC/tree/master/datasets)**
+### **[Auto-MEKA_GGP](https://github.com/alexgcsa/AutoMLC/blob/master/how-to-run/Auto-MEKA_GGP.md)**
 
 ## **Datasets**
 
