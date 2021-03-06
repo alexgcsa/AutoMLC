@@ -1203,9 +1203,9 @@ public class AutoMEKA_StdGGP extends AbstractMultiLabelClassifier implements Mul
             System.out.println();
         }        
         
-        DataUtil.savingLog(interBuffer_case3, "LogCase3_OnlyXOverInra", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
-        DataUtil.savingLog(interBuffer_case4, "LogCase4_XOverInraAndMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
-        DataUtil.savingLog(interBuffer_case5, "LogCase5_OnlyMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
+        //DataUtil.savingLog(interBuffer_case3, "LogCase3_OnlyXOverInra", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
+        //DataUtil.savingLog(interBuffer_case4, "LogCase4_XOverInraAndMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
+        //DataUtil.savingLog(interBuffer_case5, "LogCase5_OnlyMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
         
         DataUtil.removeUnnecessaryFiles(intemBudgets, this.getExperimentName());      
         System.gc();       

@@ -14,7 +14,6 @@
  */
 package meka.classifiers.multilabel.meta;
 //Java imports:
-import meka.classifiers.multilabel.meta.oldversions30012020.*;
 import meka.classifiers.multilabel.meta.util.EvolutionaryUtil;
 import meka.classifiers.multilabel.meta.util.DataUtil;
 import java.text.DateFormat;
@@ -49,16 +48,16 @@ import org.epochx.gr.representation.GRCandidateProgram;
 
 
 /**
- * Auto-MEKA_BS.java - A method for selecting and configuring multi-label 
+ * Auto-MEKA_LS.java - A method for selecting and configuring multi-label 
  * classification (MLC) algorithm in the MEKA software
  * (version with multifidelity).
  * 
- * Auto-MEKA_BS uses a grammar-based beam search approach, aiming to find the most 
+ * Auto-MEKA_LS uses a grammar-based local (beam=1) search approach, aiming to find the most 
  * suitable MLC algorithm for a given dataset of interest
  *
  * @author Alex G. C. de Sa (alexgcsa@gmail.com)
  */
-public class AutoMEKA_BS extends AbstractMultiLabelClassifier implements MultiLabelClassifier {
+public class AutoMEKA_LS extends AbstractMultiLabelClassifier implements MultiLabelClassifier {
     
     //For serialization.
     private static final long serialVersionUID = -1875298821884012336L;
@@ -124,7 +123,7 @@ public class AutoMEKA_BS extends AbstractMultiLabelClassifier implements MultiLa
     
 
 
-    public AutoMEKA_BS(String [] argv) {
+    public AutoMEKA_LS(String [] argv) {
         
         this.bestMLCalgorithm = new CC();
         
@@ -1026,6 +1025,6 @@ public class AutoMEKA_BS extends AbstractMultiLabelClassifier implements MultiLa
      * @param args the arguments of the method.
      */
     public static void main(String args[]) {
-        AbstractMultiLabelClassifier.runClassifier(new AutoMEKA_BS(args), args);
+        AbstractMultiLabelClassifier.runClassifier(new AutoMEKA_LS(args), args);
     }
 }

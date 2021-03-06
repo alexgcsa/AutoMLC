@@ -16,9 +16,6 @@
 
 package meka.classifiers.multilabel.meta;
 
-import meka.classifiers.multilabel.meta.oldversions30012020.*;
-import weka.attributeSelection.ASEvaluation;
-import weka.attributeSelection.ASSearch;
 import weka.attributeSelection.AttributeSelection;
 
 import weka.classifiers.AbstractClassifier;

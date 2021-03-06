@@ -46,11 +46,11 @@ import org.epochx.gr.representation.GRCandidateProgram;
 
 
 /**
- * AutoMEKA_GGP.java - A method for selecting and configuring multi-label 
+ * AutoMEKA_spGGP.java - A speciaton GGP method for selecting and configuring multi-label 
  classification (MLC) algorithm in the MEKA software.
  * 
- * Auto-MEKA uses a grammar-based genetic programming approach (from EpochX)
- * aiming to find the most suitable MLC algorithm for a given dataset of 
+ * Auto-MEKA_SpGGP uses a speciation (Sp) approach on grammar-based genetic programming approach 
+ * (from EpochX) aiming to find the most suitable MLC algorithm for a given dataset of 
  * interest
  *
  * @author Alex G. C. de Sa (alexgcsa@dcc.ufmg.br)
@@ -1348,11 +1348,11 @@ public class AutoMEKA_SpGGP extends AbstractMultiLabelClassifier implements Mult
         
         System.gc();
         
-        DataUtil.savingLog(interBuffer_case1, "LogCase1_OnlyXOverInter", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());   
-        DataUtil.savingLog(interBuffer_case2, "LogCase2_XOverInterAndMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
-        DataUtil.savingLog(interBuffer_case3, "LogCase3_OnlyXOverInra", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
-        DataUtil.savingLog(interBuffer_case4, "LogCase4_XOverInraAndMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
-        DataUtil.savingLog(interBuffer_case5, "LogCase5_OnlyMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
+        //DataUtil.savingLog(interBuffer_case1, "LogCase1_OnlyXOverInter", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit());   
+        //DataUtil.savingLog(interBuffer_case2, "LogCase2_XOverInterAndMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
+        //DataUtil.savingLog(interBuffer_case3, "LogCase3_OnlyXOverInra", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
+       //DataUtil.savingLog(interBuffer_case4, "LogCase4_XOverInraAndMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
+        //DataUtil.savingLog(interBuffer_case5, "LogCase5_OnlyMutation", this.getGeneraltimeLimit(), this.getSavingDirectory(), this.getExperimentName(), this.getSeed(), this.getFoldInit()); 
         
         DataUtil.removeUnnecessaryFiles(intemBudgets, this.getExperimentName());
         
