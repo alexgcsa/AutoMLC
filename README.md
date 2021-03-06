@@ -18,6 +18,8 @@ This is a project that provides 6 AutoML methods in the context of multi-label c
 
 All methods try to enhance the performance of multi-label classification algorithms on the [MEKA tool](http://waikato.github.io/meka/). 
 
+## **Publications**
+
 If you use this project in your work, be aware of the details in the following papers and details:
 
 1. **GA-Auto-MLC**
