@@ -22,11 +22,11 @@ All methods try to enhance the performance of multi-label classification algorit
 
 If you use this project in your work, be aware of the details in the following papers and details:
 
-1. **GA-Auto-MLC**
+1. **GA-Auto-MLC:**
 
   - A. G. C. de Sá, G. L. Pappa, and A. A. Freitas. Towards a method for automatically selecting and configuring multi-label classification algorithms. In Proceedings of the Genetic and Evolutionary Computation Conference Companion , pp. 1125–1132, 2017. [ [PDF](https://www.cs.kent.ac.uk/people/staff/aaf/pub_papers.dir/GECCO-2017-ECADA-Wksp-de-Sa.pdf) ] [ [ACM](https://dl.acm.org/citation.cfm?id=3082053) ]
 
-2. **Auto-MEKA_GGP**
+2. **Auto-MEKA_GGP:**
 
   - A. G. C. de Sá, G. L. Pappa, and A. A. Freitas. Automated Selection and Configuration of Multi-Label Classification Algorithms with Grammar-based Genetic Programming. In Proceedings of the  International Conference on Parallel Problem Solving from Nature (PPSN), 2018.  [ [PDF](https://www.cs.kent.ac.uk/people/staff/aaf/pub_papers.dir/PPSN-2018-de-Sa.pdf) ] [ [Springer](https://link.springer.com/chapter/10.1007/978-3-319-99259-4_25) ]
 
