@@ -1,4 +1,4 @@
-# Auto-MEKA_RS
+# Auto-MEKA_LS
 Automated Multi-Label Classification on the MEKA software using Local Search (Bean Search, where bean=1).
 
 ## **How to Run**
