@@ -61,6 +61,6 @@ See [LICENSE](https://github.com/alexgcsa/AutoMLC/blob/master/LICENSE) file.
 
 ## **Support**
 
-Any questions or comments should be directed to Alex de Sá (alexgcsa@gmail.com). You can also create an issue on the repository.
+You should be directed to an issue on this repository for any question, doubt or comment.
 
 
