@@ -9,8 +9,8 @@ Run the following command line in the directory you downloaded from github:
 
 
 If it works for you, you can try to explore the options for this method:
-- -P <value> : to set the population size (default: 10).
-- -G <value> : to set the number of generations (default: 2).
+- -P <value> : to set the population size, i.e., the number of algorithms to generate at random at each iteration (default: 10).
+- -G <value> : to set the number of generations/iterations (default: 2).
 - -N <value> : to set the number of processes running in parallel (default: 1). This is just to run several MLC algorithms at the same time.
 - -H <value>: to set the random seed (default: 11321).
 - -Y <value>: to set the fold init (default: 0). This parameter is just useful to create the fold into the internal validation.
