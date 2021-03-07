@@ -26,6 +26,7 @@ If it works for you, you can try to explore the options for this method:
 - -W <path>: to set the path for the experiment (default: "ExperimentABC").
 - -C : flag to change from generational to anytime behavior (default: not used, False).
 - -B <value>: to set the maximum time limit for the experiment (default: 10 [minutes]).
+- -Bs <value>: to set the intermediate time limits for the experiment. For instance, if B is 10 [minutes], and Bs is 1 [minute], the results will be saved every one minute. This way, you can evaluate intermediate results. B mod Bs should be equal to zero. (default: 1 [minutes]).
 - -JavaDir <path>: to set the path for the used Java. (default: "java")
 - -D <value>: saving directory (default: "~/"). You can define any directory.
 - -O <value>: to set the search space mode, i.e., which search space the GGP will use to guide its search. The options are: 
