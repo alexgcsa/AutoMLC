@@ -29,6 +29,7 @@ If it works for you, you can try to explore the options for this method:
   - 2: Large (default)
 
 
+**All MLC algorithms are run with a time budget of 180 seconds (3 minutes).**
 
 ## **Experimental Results**
 
