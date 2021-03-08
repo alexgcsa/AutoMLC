@@ -336,7 +336,7 @@ public class AutoMEKA_BO_Large extends AbstractClassifier{
         
         for(int i = 0; i < parallelRuns; i++) {
             estimatedMetricValues[i] = -1;
-            msExperimentPaths[i] = Files.createTempDirectory(Paths.get("/scratch/alexgcsa"), "automeka").toString() + File.separator;
+            msExperimentPaths[i] = Files.createTempDirectory(Paths.get("/tmp"), "automeka").toString() + File.separator;
 //                        msExperimentPaths[i] = Files.createTempDirectory( "automeka").toString() + File.separator;
             Experiment exp = new Experiment();
             exp.name = expName;

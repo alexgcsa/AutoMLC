@@ -336,7 +336,7 @@ public class AutoMEKA_BO_MinimalMedium extends AbstractClassifier{
         
         for(int i = 0; i < parallelRuns; i++) {
             estimatedMetricValues[i] = -1;
-            msExperimentPaths[i] = Files.createTempDirectory(Paths.get("/scratch/alexgcsa"), "automeka").toString() + File.separator;
+            msExperimentPaths[i] = Files.createTempDirectory(Paths.get("/tmp"), "automeka").toString() + File.separator;
 //            msExperimentPaths[i] = Files.createTempDirectory( "automeka").toString() + File.separator;
             Experiment exp = new Experiment();
             exp.name = expName;
@@ -631,34 +631,22 @@ public class AutoMEKA_BO_MinimalMedium extends AbstractClassifier{
         for(int i=0; i < this.parallelRuns; i++){
             String filePath = msExperimentPaths[i] + expName + File.separator + "out" + File.separator + "automeka" + File.separator + "traj-run-"+ (this.seed + i) +".txt";
             logs.append("###########THREAD ").append((i+1)).append("###########\n");
-            br = new BufferedReader(new FileReader(filePath));
-            
-            while((line=br.readLine())!= null){
-                logs.append(line).append("\n");
-            } 
-            br.close();
-            System.gc();            
+            try{
+                br = new BufferedReader(new FileReader(filePath));
+
+
+
+                while((line=br.readLine())!= null){
+                    logs.append(line).append("\n");
+                } 
+                br.close();
+                System.gc();   
+            }catch (Exception e){
+                System.out.println("");
+            }
         }
         
-        bw = new BufferedWriter(new FileWriter(this.savingDir + "results-" + this.name + File.separator + "traj-runs.txt", true));
-        bw.write(logs.toString());
-        bw.close();       
-        logs = new StringBuffer();
-        for(int i=0; i < this.parallelRuns; i++){
-            String filePath = msExperimentPaths[i] + expName + File.separator + "out" + File.separator + "automeka" + File.separator + "log-warn"+ (this.seed + i) +".txt";
-            logs.append("###########THREAD ").append((i+1)).append("###########\n");
-            br = new BufferedReader(new FileReader(filePath));
-            
-            while((line=br.readLine())!= null){
-                logs.append(line).append("\n");
-            } 
-            br.close();
-            System.gc();            
-        }
-        
-        bw = new BufferedWriter(new FileWriter(this.savingDir + "results-" + this.name + File.separator + "log-warn.txt", true));
-        bw.write(logs.toString());
-        bw.close();          
+         
     }
     
     
@@ -669,8 +657,8 @@ public class AutoMEKA_BO_MinimalMedium extends AbstractClassifier{
          * It saves the results in specific files and folders. *
          */
         new File(this.savingDir + "results-" + this.name + File.separator).mkdirs();
-        BufferedWriter bf0 = new BufferedWriter(new FileWriter(this.savingDir + "results-" + this.name + File.separator + this.getFold() + "Estatisticas-" + this.name + ".csv", true));
-        BufferedWriter bf1 = new BufferedWriter(new FileWriter(this.savingDir + "results-" + this.name + File.separator + this.getFold() + "EstatisticasCompacto-" + this.name + ".csv", true));
+        BufferedWriter bf0 = new BufferedWriter(new FileWriter(this.savingDir + "results-" + this.name + File.separator + this.getFold() + "Statistics-" + this.name + ".csv", true));
+        BufferedWriter bf1 = new BufferedWriter(new FileWriter(this.savingDir + "results-" + this.name + File.separator + this.getFold() + "StatisticsCompact-" + this.name + ".csv", true));
 
         System.gc();
 

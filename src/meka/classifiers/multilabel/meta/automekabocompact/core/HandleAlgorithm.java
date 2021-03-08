@@ -36,7 +36,7 @@ public class HandleAlgorithm {
             p++;
         }        
         int newtimeoutLimit = 180;
-        String javaDir = "/scratch/alexgcsa/jdk1.8.0_171/jre/bin/java";
+        String javaDir = "java";
         
         String startCommand = "timeout " + newtimeoutLimit+"s "+javaDir+" -Xmx2g -cp weka.jar:meka.jar " +mlc_algorithm + " -t " + path + learningSet + " -T " + path + evaluationSet + " -verbosity 6 ";
         String [] resultantAlgorithm = null;
