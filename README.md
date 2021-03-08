@@ -46,7 +46,7 @@ If you use this project in your work, be aware of the details in the following p
 
 All methods depend on Java 8. We recommend you to use the jdk 1.8.0 281 as all methods were compiled on this jdk version. However, any jdk for Java 8 should be fine. You can find jdk for Java 8 to download at:  https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
 
-You are going to use the jdk directory to run the AutoML methods. You can find the details on how to run the AutoML methods for multi-label classification in the following links:
+You are going to use the jdk directory to run the AutoML methods. You can find the details on how to run the AutoML methods for multi-label classification problems in the following links:
 
 ### **[GA-Auto-MLC](https://github.com/alexgcsa/AutoMLC/blob/master/how-to-run/GA-Auto-MLC.md)**
 
