@@ -7,11 +7,11 @@ This method is an adaptation of Auto-WEKA.
 
 Run the following command line in the directory you downloaded from github to run Auto-MEKA_BO for the minimal or medium search spaces:
 
-> /home/<your_user_dir>/<...>/jdk1.8.0_171/jre/bin/java -Xmx8g -cp automeka.jar meka.classifiers.multilabel.meta.AutoMEKA_BO_MinimalMedium -t datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-train1.arff -T datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-test1.arff
+> /home/<your_user_dir>/<...>/jdk1.8.0_281/jre/bin/java -Xmx8g -cp automeka.jar meka.classifiers.multilabel.meta.AutoMEKA_BO_MinimalMedium -t datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-train1.arff -T datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-test1.arff
 
 Or run the following command line in the directory you downloaded from github to run Auto-MEKA_BO for the large search spaces:
 
-> /home/<your_user_dir>/<...>/jdk1.8.0_171/jre/bin/java -Xmx8g -cp automeka.jar meka.classifiers.multilabel.meta.AutoMEKA_BO_Large -t datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-train1.arff -T datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-test1.arff
+> /home/<your_user_dir>/<...>/jdk1.8.0_281/jre/bin/java -Xmx8g -cp automeka.jar meka.classifiers.multilabel.meta.AutoMEKA_BO_Large -t datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-train1.arff -T datasets/01-Flags-Stratified5FoldsCV-Meka/Flags-test1.arff
 
 
 
