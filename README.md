@@ -71,6 +71,6 @@ See [LICENSE](https://github.com/alexgcsa/AutoMLC/blob/master/LICENSE) file.
 
 ## **Support**
 
-You should direct your question, doubt or comment to an issue on this repository. Although, you can also contact via email, an issue on github would also help other when they use this project. That's the main issue an issue is preferable.
+You should direct your question, doubt or comment to an issue on this repository. Although, you can also contact via email, an issue on github would also help others when they use this project. That's the main issue an issue is preferable.
 
 
