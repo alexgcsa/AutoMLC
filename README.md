@@ -20,7 +20,7 @@ All methods try to enhance the performance of multi-label classification algorit
 
 ## **Publications**
 
-If you use this project in your work, be aware of the details in the following papers and details:
+If you use this project in your work, be aware of the details in the following papers:
 
 1. **GA-Auto-MLC:**
 
